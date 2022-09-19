@@ -65,7 +65,7 @@ namespace CharacterMakingSystem.Animation
                         otherAnimator
                             .ObserveEveryValueChanged(_ => _.GetBool(parameter.nameHash))
                             .Where(_ => _ != animator.GetBool(parameter.nameHash))
-                            .Subscribe(_ => animator.SetBool(parameter.nameHash, otherAnimator.GetBool(parameter.nameHash)))
+                            .Subscribe(_ => animator.SetTrigger(parameter.nameHash))
                             .AddTo(this.gameObject);
                         break;
                     
