@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace CharacterMakingSystem.Animation
@@ -9,16 +8,72 @@ namespace CharacterMakingSystem.Animation
     /// </summary>
     public class AnimSyncManager : MonoBehaviour
     {
+        // 同期のターゲットとなるアニメーター
         [SerializeField] private Animator otherAnimator = null;
+        
+        // trueにすると自動でotherAnimatorにPlayerのタグのゲームオブジェクトのAnimatorを取得する
+        [SerializeField] private bool isFindPlayer = true;
 
-        private AnimatorControllerParameter[] parameters;
+        private const string PLAYER = "Player";
 
         private void Start()
         {
-            parameters = otherAnimator.parameters;
-
-            //UniRxをいれて変数監視
-            //Typeとnameで条件分岐
+            // PlayerのAnimatorを取得
+            if (isFindPlayer)
+            {
+                otherAnimator = GameObject.FindWithTag(PLAYER).GetComponent<Animator>();
+            }
+            
+            // 同期するアニメーターを取得
+            var animator = GetComponent<Animator>();
+            
+            // アニメーションによってはAnimationEventを吐いてエラーになることがあるので無効化する
+            animator.fireEvents = false;
+            
+            // ターゲットのアニメーターのパラメーターを監視して変更があれば同期対象の方でも変更する
+            foreach (var parameter in animator.parameters)
+            {
+                switch (parameter.type)
+                {
+                    case AnimatorControllerParameterType.Bool:
+                        otherAnimator
+                            .ObserveEveryValueChanged(_ => _.GetBool(parameter.nameHash))
+                            .Where(_ => _!=animator.GetBool(parameter.nameHash))
+                            .Subscribe(_ => animator.SetBool(parameter.nameHash, otherAnimator.GetBool(parameter.nameHash)))
+                            .AddTo(this.gameObject);
+                        break;
+                    
+                    case AnimatorControllerParameterType.Float:
+                        otherAnimator
+                            .ObserveEveryValueChanged(_ => _.GetFloat(parameter.nameHash))
+                            .Where(_ => Mathf.Abs(_ - animator.GetFloat(parameter.nameHash)) > 0)
+                            .Subscribe(_ => animator.SetFloat(parameter.nameHash, otherAnimator.GetFloat(parameter.nameHash)))
+                            .AddTo(this.gameObject);
+                        break;
+                    
+                    case AnimatorControllerParameterType.Int:
+                        otherAnimator
+                            .ObserveEveryValueChanged(_ => _.GetInteger(parameter.nameHash))
+                            .Where(_ => _ != animator.GetInteger(parameter.nameHash))
+                            .Subscribe(_ => animator.SetInteger(parameter.nameHash, otherAnimator.GetInteger(parameter.nameHash)))
+                            .AddTo(this.gameObject);
+                        break;
+                    
+                    // Triggerでまともに動くかは検証不足だが「Triggerは派手なBool」らしいからいけるんじゃない？
+                    // https://forum.unity.com/threads/get-if-trigger-is-set-or-is-a-condition-of-a-state.1004269/
+                    case AnimatorControllerParameterType.Trigger:
+                        otherAnimator
+                            .ObserveEveryValueChanged(_ => _.GetBool(parameter.nameHash))
+                            .Where(_ => _ != animator.GetBool(parameter.nameHash))
+                            .Subscribe(_ => animator.SetBool(parameter.nameHash, otherAnimator.GetBool(parameter.nameHash)))
+                            .AddTo(this.gameObject);
+                        break;
+                    
+                    default:
+                        Debug.LogError($"パラメータのタイプが異常です \n AnimatorControllerParameterType.{parameter.type}");
+                        break;
+                } 
+            }
         }
     }
 }
