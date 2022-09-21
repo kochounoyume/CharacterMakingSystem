@@ -27,6 +27,11 @@ namespace CharacterMakingSystem.Data
         /// ベースヘアーが必要ならtrue
         /// </summary>
         public bool baseHair;
+        
+        /// <summary>
+        /// 素体に最初から付属している部位であればtrue
+        /// </summary>
+        public bool defaultPart;
 
         /// <summary>
         /// キャラクターメイキングの髪型のデータのコンストラクタ
@@ -35,12 +40,14 @@ namespace CharacterMakingSystem.Data
         /// <param name="hairID">髪型のID</param>
         /// <param name="filePath">プレファブのファイルパス</param>
         /// <param name="baseHair">ベースヘアーが必要かどうかのフラグ</param>
-        public HairData(Gender gender, int hairID, string filePath, bool baseHair)
+        /// <param name="defaultPart">素体に最初から付属しているかどうかのフラグ</param>
+        public HairData(Gender gender, int hairID, string filePath, bool baseHair, bool defaultPart)
         {
             this.gender = gender;
             this.hairID = hairID;
             this.filePath = filePath;
             this.baseHair = baseHair;
+            this.defaultPart = defaultPart;
         }
     }
 }

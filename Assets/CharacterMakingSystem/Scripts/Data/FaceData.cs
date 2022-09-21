@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace CharacterMakingSystem.Data
 {
     /// <summary>
@@ -22,9 +24,9 @@ namespace CharacterMakingSystem.Data
         public string filePath;
         
         /// <summary>
-        /// 首を伸ばす調整が必要な場合のボーンの調整値
+        /// 素体に最初から付属している部位であればtrue
         /// </summary>
-        public float stretchValue;
+        public bool defaultPart;
 
         /// <summary>
         /// キャラクターメイキングの顔セットのデータのコンストラクタ
@@ -32,13 +34,13 @@ namespace CharacterMakingSystem.Data
         /// <param name="gender">性別</param>
         /// <param name="faceID">顔セットのID</param>
         /// <param name="filePath">プレファブのファイルパス</param>
-        /// <param name="stretchValue">ボーンの調整値</param>
-        public FaceData(Gender gender, int faceID, string filePath, float stretchValue)
+        /// <param name="defaultPart">素体に最初から付属しているかどうかのフラグ</param>
+        public FaceData(Gender gender, int faceID, string filePath, bool defaultPart)
         {
             this.gender = gender;
             this.faceID = faceID;
             this.filePath = filePath;
-            this.stretchValue = stretchValue;
+            this.defaultPart = defaultPart;
         }
     }
 

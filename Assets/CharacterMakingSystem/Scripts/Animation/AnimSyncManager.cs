@@ -10,7 +10,7 @@ namespace CharacterMakingSystem.Animation
     {
         // 同期のターゲットとなるアニメーター
         [SerializeField] private Animator otherAnimator = null;
-        
+
         // trueにすると自動でotherAnimatorにPlayerのタグのゲームオブジェクトのAnimatorを取得する
         [SerializeField] private bool isFindPlayer = true;
 
@@ -18,15 +18,16 @@ namespace CharacterMakingSystem.Animation
 
         private void Start()
         {
+            // 同期するアニメーターを取得
+            var animator = GetComponent<Animator>();
+            
             // PlayerのAnimatorを取得
             if (isFindPlayer)
             {
                 otherAnimator = GameObject.FindWithTag(PLAYER).GetComponent<Animator>();
+                animator.runtimeAnimatorController = otherAnimator.runtimeAnimatorController;
             }
-            
-            // 同期するアニメーターを取得
-            var animator = GetComponent<Animator>();
-            
+
             // アニメーションによってはAnimationEventを吐いてエラーになることがあるので無効化する
             animator.fireEvents = false;
             

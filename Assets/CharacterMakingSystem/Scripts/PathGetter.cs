@@ -15,6 +15,7 @@ public class PathGetter : MonoBehaviour
         string path = AssetDatabase.GetAssetPath(instanceID);
 
         // copy clipboard
-        GUIUtility.systemCopyBuffer = path.TrimStart(exclusionPath.ToCharArray()).TrimEnd(extensionPath.ToCharArray());
+        //GUIUtility.systemCopyBuffer = path.TrimStart(exclusionPath.ToCharArray()).TrimEnd(extensionPath.ToCharArray());
+        GUIUtility.systemCopyBuffer = path.Replace(exclusionPath,"").Replace(extensionPath,"");
     }
 }
