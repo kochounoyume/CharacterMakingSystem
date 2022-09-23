@@ -15,7 +15,7 @@ MonoBehaviour:
   faceDatas:
   - gender: 0
     faceID: 1
-    filePath: Prefabs/Boys/Faces/Boy1
+    filePath: CMS/Prefabs/Boys/Faces/Boy1
     defaultPart: 0
   - gender: 0
     faceID: 2
@@ -23,71 +23,346 @@ MonoBehaviour:
     defaultPart: 1
   - gender: 0
     faceID: 3
-    filePath: Prefabs/Boys/Faces/Boy3
+    filePath: CMS/Prefabs/Boys/Faces/Boy3
     defaultPart: 0
   - gender: 0
     faceID: 4
-    filePath: Prefabs/Boys/Faces/Boy4
+    filePath: CMS/Prefabs/Boys/Faces/Boy4
     defaultPart: 0
   - gender: 0
     faceID: 5
-    filePath: Prefabs/Boys/Faces/Boy5
+    filePath: CMS/Prefabs/Boys/Faces/Boy5
     defaultPart: 0
   - gender: 0
     faceID: 6
-    filePath: Prefabs/Boys/Faces/Boy6
+    filePath: CMS/Prefabs/Boys/Faces/Boy6
     defaultPart: 0
   - gender: 0
     faceID: 7
-    filePath: Prefabs/Boys/Faces/Boy7
+    filePath: CMS/Prefabs/Boys/Faces/Boy7
     defaultPart: 0
   - gender: 0
     faceID: 8
-    filePath: Prefabs/Boys/Faces/Boy8
+    filePath: CMS/Prefabs/Boys/Faces/Boy8
+    defaultPart: 0
+  - gender: 0
+    faceID: 9
+    filePath: CMS/Prefabs/Boys/Faces/Boy9
+    defaultPart: 0
+  - gender: 0
+    faceID: 10
+    filePath: CMS/Prefabs/Boys/Faces/Boy10
+    defaultPart: 0
+  - gender: 0
+    faceID: 11
+    filePath: CMS/Prefabs/Boys/Faces/Boy11
+    defaultPart: 0
+  - gender: 0
+    faceID: 12
+    filePath: CMS/Prefabs/Boys/Faces/Boy12
+    defaultPart: 0
+  - gender: 0
+    faceID: 13
+    filePath: CMS/Prefabs/Boys/Faces/Boy13
+    defaultPart: 0
+  - gender: 0
+    faceID: 14
+    filePath: CMS/Prefabs/Boys/Faces/Boy14
+    defaultPart: 0
+  - gender: 0
+    faceID: 15
+    filePath: CMS/Prefabs/Boys/Faces/Boy15
+    defaultPart: 0
+  - gender: 0
+    faceID: 16
+    filePath: CMS/Prefabs/Boys/Faces/Boy16
+    defaultPart: 0
+  - gender: 0
+    faceID: 17
+    filePath: CMS/Prefabs/Boys/Faces/Boy17
+    defaultPart: 0
+  - gender: 0
+    faceID: 18
+    filePath: CMS/Prefabs/Boys/Faces/Boy18
+    defaultPart: 0
+  - gender: 0
+    faceID: 19
+    filePath: CMS/Prefabs/Boys/Faces/Boy18
+    defaultPart: 0
+  - gender: 1
+    faceID: 1
+    filePath: CMS/Prefabs/Girls/Faces/Girl1
+    defaultPart: 0
+  - gender: 1
+    faceID: 2
+    filePath: CMS/Prefabs/Girls/Faces/Girl2
+    defaultPart: 0
+  - gender: 1
+    faceID: 3
+    filePath: CMS/Prefabs/Girls/Faces/Girl3
+    defaultPart: 0
+  - gender: 1
+    faceID: 4
+    filePath: CMS/Prefabs/Girls/Faces/Girl4
+    defaultPart: 0
+  - gender: 1
+    faceID: 5
+    filePath: CMS/Prefabs/Girls/Faces/Girl5
+    defaultPart: 0
+  - gender: 1
+    faceID: 6
+    filePath: 
+    defaultPart: 1
+  - gender: 1
+    faceID: 7
+    filePath: CMS/Prefabs/Girls/Faces/Girl7
+    defaultPart: 0
+  - gender: 1
+    faceID: 8
+    filePath: CMS/Prefabs/Girls/Faces/Girl8
+    defaultPart: 0
+  - gender: 1
+    faceID: 9
+    filePath: CMS/Prefabs/Girls/Faces/Girl9
+    defaultPart: 0
+  - gender: 1
+    faceID: 10
+    filePath: CMS/Prefabs/Girls/Faces/Girl10
+    defaultPart: 0
+  - gender: 1
+    faceID: 11
+    filePath: CMS/Prefabs/Girls/Faces/Girl11
+    defaultPart: 0
+  - gender: 1
+    faceID: 12
+    filePath: CMS/Prefabs/Girls/Faces/Girl12
+    defaultPart: 0
+  - gender: 1
+    faceID: 13
+    filePath: CMS/Prefabs/Girls/Faces/Girl13
+    defaultPart: 0
+  - gender: 1
+    faceID: 14
+    filePath: CMS/Prefabs/Girls/Faces/Girl14
+    defaultPart: 0
+  - gender: 1
+    faceID: 15
+    filePath: CMS/Prefabs/Girls/Faces/Girl15
+    defaultPart: 0
+  - gender: 1
+    faceID: 16
+    filePath: CMS/Prefabs/Girls/Faces/Girl16
+    defaultPart: 0
+  - gender: 1
+    faceID: 17
+    filePath: CMS/Prefabs/Girls/Faces/Girl17
+    defaultPart: 0
+  - gender: 1
+    faceID: 18
+    filePath: CMS/Prefabs/Girls/Faces/Girl18
+    defaultPart: 0
+  - gender: 1
+    faceID: 19
+    filePath: CMS/Prefabs/Girls/Faces/Girl19
     defaultPart: 0
   hairDatas:
   - gender: 0
     hairID: 1
-    filePath: Prefabs/Boys/Hairs/Boy_1_On
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_1_On
     baseHair: 1
     defaultPart: 0
   - gender: 0
     hairID: 2
-    filePath: Prefabs/Boys/Hairs/Boy_2_On
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_2_On
     baseHair: 1
     defaultPart: 0
   - gender: 0
     hairID: 3
-    filePath: Prefabs/Boys/Hairs/Boy_3_On
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_3_On
     baseHair: 1
     defaultPart: 0
   - gender: 0
     hairID: 4
-    filePath: Prefabs/Boys/Hairs/Boy_4_On
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_4_On
     baseHair: 1
     defaultPart: 0
   - gender: 0
     hairID: 5
-    filePath: Prefabs/Boys/Hairs/Boy_5_On
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_5_On
     baseHair: 1
     defaultPart: 0
   - gender: 0
     hairID: 6
-    filePath: Prefabs/Boys/Hairs/Boy_6_On
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_6_On
     baseHair: 1
     defaultPart: 0
   - gender: 0
     hairID: 7
-    filePath: Prefabs/Boys/Hairs/Boy_7_Off
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_7_Off
     baseHair: 0
     defaultPart: 0
   - gender: 0
     hairID: 8
-    filePath: Prefabs/Boys/Hairs/Boy_8_Off
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_8_Off
     baseHair: 0
     defaultPart: 0
   - gender: 0
     hairID: 9
-    filePath: Prefabs/Boys/Hairs/Boy_9_Off
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_9_Off
     baseHair: 0
+    defaultPart: 0
+  - gender: 0
+    hairID: 10
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_10_Off
+    baseHair: 0
+    defaultPart: 0
+  - gender: 0
+    hairID: 11
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_11_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 0
+    hairID: 12
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_12_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 0
+    hairID: 13
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_13_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 0
+    hairID: 14
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_14_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 0
+    hairID: 15
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_15_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 0
+    hairID: 16
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_16_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 0
+    hairID: 17
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_17_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 0
+    hairID: 18
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_18_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 0
+    hairID: 19
+    filePath: CMS/Prefabs/Boys/Hairs/Boy_19_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 0
+    hairID: 20
+    filePath: 
+    baseHair: 1
+    defaultPart: 1
+  - gender: 1
+    hairID: 1
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_1_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 2
+    filePath: 
+    baseHair: 1
+    defaultPart: 1
+  - gender: 1
+    hairID: 3
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_3_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 4
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_4_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 5
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_5_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 6
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_6_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 7
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_7_Off
+    baseHair: 0
+    defaultPart: 0
+  - gender: 1
+    hairID: 8
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_8_Off
+    baseHair: 0
+    defaultPart: 0
+  - gender: 1
+    hairID: 9
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_9_Off
+    baseHair: 0
+    defaultPart: 0
+  - gender: 1
+    hairID: 10
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_10_Off
+    baseHair: 0
+    defaultPart: 0
+  - gender: 1
+    hairID: 11
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_11_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 12
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_12_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 13
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_13_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 14
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_14_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 15
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_15_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 16
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_16_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 17
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_17_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 18
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_18_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 19
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_19_On
+    baseHair: 1
+    defaultPart: 0
+  - gender: 1
+    hairID: 20
+    filePath: CMS/Prefabs/Girls/Hairs/Girl_20_On
+    baseHair: 1
     defaultPart: 0
