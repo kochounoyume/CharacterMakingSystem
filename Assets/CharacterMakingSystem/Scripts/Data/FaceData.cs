@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace CharacterMakingSystem.Data
@@ -21,7 +22,7 @@ namespace CharacterMakingSystem.Data
         /// <summary>
         /// プレファブのAddressableでのアドレス
         /// </summary>
-        public AssetReference address;
+        public AssetReferenceT<GameObject> address;
         
         /// <summary>
         /// 素体に最初から付属している部位であればtrue
@@ -35,7 +36,7 @@ namespace CharacterMakingSystem.Data
         /// <param name="faceID">顔セットのID</param>
         /// <param name="address">プレファブのアドレス</param>
         /// <param name="defaultPart">素体に最初から付属しているかどうかのフラグ</param>
-        public FaceData(Gender gender, int faceID, AssetReference address, bool defaultPart)
+        public FaceData(Gender gender, int faceID, AssetReferenceT<GameObject> address, bool defaultPart)
         {
             this.gender = gender;
             this.faceID = faceID;

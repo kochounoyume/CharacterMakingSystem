@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace CharacterMakingSystem.Data
@@ -21,7 +22,7 @@ namespace CharacterMakingSystem.Data
         /// <summary>
         /// プレファブのAddressableでのアドレス
         /// </summary>
-        public AssetReference address;
+        public AssetReferenceT<GameObject> address;
 
         /// <summary>
         /// ベースヘアーが必要ならtrue
@@ -41,7 +42,7 @@ namespace CharacterMakingSystem.Data
         /// <param name="address">プレファブのAddressableでのアドレス</param>
         /// <param name="baseHair">ベースヘアーが必要かどうかのフラグ</param>
         /// <param name="defaultPart">素体に最初から付属しているかどうかのフラグ</param>
-        public HairData(Gender gender, int hairID, AssetReference address, bool baseHair, bool defaultPart)
+        public HairData(Gender gender, int hairID, AssetReferenceT<GameObject> address, bool baseHair, bool defaultPart)
         {
             this.gender = gender;
             this.hairID = hairID;
