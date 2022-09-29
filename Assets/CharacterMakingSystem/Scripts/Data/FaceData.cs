@@ -1,4 +1,4 @@
-using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace CharacterMakingSystem.Data
 {
@@ -19,9 +19,9 @@ namespace CharacterMakingSystem.Data
         public int faceID;
         
         /// <summary>
-        /// プレファブが配置してあるResourcesフォルダ以下のパス
+        /// プレファブのAddressableでのアドレス
         /// </summary>
-        public string filePath;
+        public AssetReference address;
         
         /// <summary>
         /// 素体に最初から付属している部位であればtrue
@@ -33,13 +33,13 @@ namespace CharacterMakingSystem.Data
         /// </summary>
         /// <param name="gender">性別</param>
         /// <param name="faceID">顔セットのID</param>
-        /// <param name="filePath">プレファブのファイルパス</param>
+        /// <param name="address">プレファブのアドレス</param>
         /// <param name="defaultPart">素体に最初から付属しているかどうかのフラグ</param>
-        public FaceData(Gender gender, int faceID, string filePath, bool defaultPart)
+        public FaceData(Gender gender, int faceID, AssetReference address, bool defaultPart)
         {
             this.gender = gender;
             this.faceID = faceID;
-            this.filePath = filePath;
+            this.address = address;
             this.defaultPart = defaultPart;
         }
     }

@@ -1,4 +1,4 @@
-using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace CharacterMakingSystem.Data
 {
@@ -19,9 +19,9 @@ namespace CharacterMakingSystem.Data
         public int hairID;
 
         /// <summary>
-        /// プレファブが配置してあるResourcesフォルダ以下のパス
+        /// プレファブのAddressableでのアドレス
         /// </summary>
-        public string filePath;
+        public AssetReference address;
 
         /// <summary>
         /// ベースヘアーが必要ならtrue
@@ -38,14 +38,14 @@ namespace CharacterMakingSystem.Data
         /// </summary>
         /// <param name="gender">性別</param>
         /// <param name="hairID">髪型のID</param>
-        /// <param name="filePath">プレファブのファイルパス</param>
+        /// <param name="address">プレファブのAddressableでのアドレス</param>
         /// <param name="baseHair">ベースヘアーが必要かどうかのフラグ</param>
         /// <param name="defaultPart">素体に最初から付属しているかどうかのフラグ</param>
-        public HairData(Gender gender, int hairID, string filePath, bool baseHair, bool defaultPart)
+        public HairData(Gender gender, int hairID, AssetReference address, bool baseHair, bool defaultPart)
         {
             this.gender = gender;
             this.hairID = hairID;
-            this.filePath = filePath;
+            this.address = address;
             this.baseHair = baseHair;
             this.defaultPart = defaultPart;
         }

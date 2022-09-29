@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class PathGetter : MonoBehaviour
+public class EditorScripting : MonoBehaviour
 {
     private const string exclusionPath = "Assets/CharacterMakingSystem/Resources/";
     private const string extensionPath = ".prefab";
@@ -15,7 +15,6 @@ public class PathGetter : MonoBehaviour
         string path = AssetDatabase.GetAssetPath(instanceID);
 
         // copy clipboard
-        //GUIUtility.systemCopyBuffer = path.TrimStart(exclusionPath.ToCharArray()).TrimEnd(extensionPath.ToCharArray());
         GUIUtility.systemCopyBuffer = path.Replace(exclusionPath,"").Replace(extensionPath,"");
     }
 }
