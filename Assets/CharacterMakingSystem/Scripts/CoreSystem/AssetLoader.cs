@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -26,7 +25,7 @@ namespace CharacterMakingSystem.CoreSystem
             if (cacheReferences.Contains(assetReference))
             {
                 // 同時に同じアセットをロードしようとしていたら待機させる
-                UniTask.WaitUntil(() => assetReference.IsDone);
+                await UniTask.WaitUntil(() => assetReference.IsDone);
             }
             else
             {
@@ -39,7 +38,7 @@ namespace CharacterMakingSystem.CoreSystem
                 // ロードする
                 return await Addressables.LoadAssetAsync<TObject>(assetReference);
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Debug.LogError(e);
                 return null;
@@ -61,7 +60,7 @@ namespace CharacterMakingSystem.CoreSystem
             // 参照リストのアセットのキャッシュを開放する
             foreach (var cacheReference in cacheReferences)
             {
-                Addressables.Release(cacheReference);
+                cacheReference.ReleaseAsset();
             }
             
             // 参照リストをクリアする

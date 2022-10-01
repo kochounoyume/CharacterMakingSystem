@@ -7,7 +7,7 @@ namespace CharacterMakingSystem.CoreSystem
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<AssetLoader>().AsTransient();
+            Container.BindInterfacesTo<AssetLoader>().AsCached();
         }
     }
 }
