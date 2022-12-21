@@ -14,6 +14,7 @@
 
 - Extenject/UniRx/UniTask/UniVRM - MITライセンス
 - Starter Assets - Third Person Character Controller - Unity Companionライセンス
+- Nature Starter Kit2：Standard Unity Asset Store EULA Sheet License的な
 
 # 権利表記
 ## Extenject
@@ -96,8 +97,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-## Starter Assets - Third Person Character Controller
-This package is licensed under the Unity Companion License.
-For full license terms, please see: https://unity3d.com/legal/licenses/Unity_Companion_License
-
