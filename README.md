@@ -1,5 +1,9 @@
 # CharacterMakingSystem
 キャラクターメイキングを実装するパッケージです。
+
+※作りかけですが、現在こんな感じ。
+![DemoScreen](https://user-images.githubusercontent.com/78918084/210250326-29dcbfda-cc50-4ff0-9e96-ec2a861a22e3.gif)
+
 以下のアセットを利用しています。
 - [Extenject 9.2.1](https://github.com/Mathijs-Bakker/Extenject)
 - [UniRx 7.1.0](https://assetstore.unity.com/packages/tools/integration/unirx-reactive-extensions-for-unity-17276?locale=ja-JP)
