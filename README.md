@@ -12,6 +12,9 @@
 - [UnityEffectSample](https://github.com/ktkkumamoto/UnityEffectSample)
 - [Starter Assets - Third Person Character Controller 1.1.1](https://assetstore.unity.com/packages/essentials/starter-assets-third-person-character-controller-196526?locale=ja-JP)
 
+また、素材活用のため以下のサイトを利用しております。
+- [Game-icons](https://game-icons.net/)
+
 # ライセンス
 「MIT」にて配布します。
 
