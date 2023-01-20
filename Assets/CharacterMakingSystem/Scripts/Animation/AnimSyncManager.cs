@@ -6,6 +6,7 @@ namespace CharacterMakingSystem.Animation
     /// <summary>
     /// 同じアニメーターコントローラーを使う二者のパラメーターを同期する
     /// </summary>
+    [RequireComponent(typeof(Animator))]
     public class AnimSyncManager : MonoBehaviour
     {
         // 同期のターゲットとなるアニメーター
