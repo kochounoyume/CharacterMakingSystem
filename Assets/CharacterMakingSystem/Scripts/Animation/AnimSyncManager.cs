@@ -41,7 +41,7 @@ namespace CharacterMakingSystem.Animation
                         otherAnimator
                             .ObserveEveryValueChanged(_ => _.GetBool(parameter.nameHash))
                             .Where(_ => _!=animator.GetBool(parameter.nameHash))
-                            .Subscribe(_ => animator.SetBool(parameter.nameHash, otherAnimator.GetBool(parameter.nameHash)))
+                            .Subscribe(_ => animator.SetBool(parameter.nameHash, _))
                             .AddTo(this.gameObject);
                         break;
                     
@@ -49,7 +49,7 @@ namespace CharacterMakingSystem.Animation
                         otherAnimator
                             .ObserveEveryValueChanged(_ => _.GetFloat(parameter.nameHash))
                             .Where(_ => Mathf.Abs(_ - animator.GetFloat(parameter.nameHash)) > 0)
-                            .Subscribe(_ => animator.SetFloat(parameter.nameHash, otherAnimator.GetFloat(parameter.nameHash)))
+                            .Subscribe(_ => animator.SetFloat(parameter.nameHash, _))
                             .AddTo(this.gameObject);
                         break;
                     
@@ -57,7 +57,7 @@ namespace CharacterMakingSystem.Animation
                         otherAnimator
                             .ObserveEveryValueChanged(_ => _.GetInteger(parameter.nameHash))
                             .Where(_ => _ != animator.GetInteger(parameter.nameHash))
-                            .Subscribe(_ => animator.SetInteger(parameter.nameHash, otherAnimator.GetInteger(parameter.nameHash)))
+                            .Subscribe(_ => animator.SetInteger(parameter.nameHash, _))
                             .AddTo(this.gameObject);
                         break;
                     

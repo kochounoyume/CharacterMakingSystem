@@ -3,6 +3,7 @@ using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CharacterMakingSystem.UI
@@ -72,39 +73,35 @@ namespace CharacterMakingSystem.UI
             // 手を離すとゆっくり消えていくタイプのScrollBarアニメーション
             scrollRect
                 .OnPointerUpAsObservable()
-                .Subscribe(_ => FloatingAnim().Forget())
+                .Subscribe(_ =>
+                {
+                    for (int i = 0; i < scrollbarDatas.Length; i++)
+                    {
+                        var barImage = scrollbarDatas[i].barImage;
+                        var barColor = scrollbarDatas[i].color;
+                        scrollbarDatas[i].tweener = DOTween
+                            .ToAlpha(
+                                getter: () => barImage.color, 
+                                setter: color => barImage.color = color,
+                                endValue: 0,
+                                duration: animDuration
+                                )
+                            .OnComplete(() =>
+                            {
+                                barImage.enabled = false;
+                                barImage.color = barColor;
+                            });
+                        WaitAnim(i).Forget(); // 並列非同期
+                    }
+                })
                 .AddTo(this);
-            
-            // ゆっくり消えていくアニメーションの実装
-            async UniTask FloatingAnim()
+
+            // アニメーションを非同期待機処理したのちリセットする
+            async UniTask WaitAnim(int index)
             {
-                // 後で並列非同期処理をするための処理格納配列
-                var waitAnims = new UniTask[scrollbarDatas.Length];
-                for (int i = 0; i < scrollbarDatas.Length; i++)
-                {
-                    var barImage = scrollbarDatas[i].barImage;
-                    var barColor = scrollbarDatas[i].color;
-                    scrollbarDatas[i].tweener = DOTween.ToAlpha(getter: () => barImage.color, setter: color => barImage.color = color, endValue: 0, duration: animDuration)
-                        .OnComplete(() =>
-                        {
-                            barImage.enabled = false;
-                            barImage.color = barColor;
-                        });
-                    waitAnims[i] = WaitAnim(scrollbarDatas[i].tweener);
-                }
-
-                // 全てアルファアニメーションが終了するまで待機（並列処理）
-                await UniTask.WhenAll(waitAnims);
-
-                // アニメーションが終わったらデータを空にする
-                for (int i = 0; i < scrollbarDatas.Length; i++)
-                {
-                    scrollbarDatas[i].tweener = null;
-                }
+                await scrollbarDatas[index].tweener;
+                scrollbarDatas[index].tweener = null;
             }
-
-            // アニメーションの非同期待機処理
-            async UniTask WaitAnim(Tweener tweener) => await tweener;
 
             // 対象のRectTransformが別のRectTransformの矩形内にあるかどうかを判定する
             bool IsVisible(RectTransform targetRect,RectTransform viewportRect)
