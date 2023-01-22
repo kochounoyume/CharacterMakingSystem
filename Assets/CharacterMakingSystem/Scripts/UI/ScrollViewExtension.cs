@@ -3,7 +3,6 @@ using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CharacterMakingSystem.UI
@@ -91,7 +90,7 @@ namespace CharacterMakingSystem.UI
                                 barImage.enabled = false;
                                 barImage.color = barColor;
                             });
-                        WaitAnim(i).Forget(); // 並列非同期
+                        WaitAnim(i).Forget(); // 投げっぱなしで並列非同期
                     }
                 })
                 .AddTo(this);
