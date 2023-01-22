@@ -11,6 +11,7 @@
 - [UniVRM 0.103.2](https://github.com/vrm-c/UniVRM)
 - [UnityEffectSample](https://github.com/ktkkumamoto/UnityEffectSample)
 - [Starter Assets - Third Person Character Controller 1.1.1](https://assetstore.unity.com/packages/essentials/starter-assets-third-person-character-controller-196526?locale=ja-JP)
+- [DOTween (HOTween v2)](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676?locale=ja-JP)
 
 また、素材活用のため以下のサイトを利用しております。
 - [Game-icons](https://game-icons.net/)
@@ -22,6 +23,7 @@
 
 - Extenject/UniRx/UniTask/UniVRM/UnityEffectSample - MITライセンス
 - Starter Assets - Third Person Character Controller - Unity Companionライセンス
+- DOTween (HOTween v2) - DOTween License
 
 # 権利表記
 ## Extenject
@@ -117,3 +119,35 @@ Copyright (c) 2020 ktk.kumamoto
 ## Starter Assets - Third Person Character Controller
 This package is licensed under the Unity Companion License. For full license terms, please see:
 [https://unity3d.com/legal/licenses/Unity_Companion_License](https://unity3d.com/legal/licenses/Unity_Companion_License)
+
+## DOTween (HOTween v2)
+DOTween License
+Copyright (c) 2014 Daniele Giardini - Demigiant
+
+Non-legalese summary
+You can freely use DOTween in both commercial and non-commercial projects.
+You can modify the code only for your own use and you cannot redistribute modified versions.
+DOTween was/is hard work: please respect the copyright.
+Definitions
+Copyright Holder
+Daniele Giardini - Demigiant.
+You/Your
+Means any person who would like to copy, distribute, or modify the Package.
+Package
+Means the collection of files distributed by the Copyright Holder, and derivatives of that collection and/or of those files. A given Package may consist of either the Standard Version, or a Modified Version.
+Distribute
+Means providing a copy of the Package or making it accessible to anyone else, or in the case of a company or organization, to others outside of your company or organization.
+Standard Version
+Refers to the Package if it has not been modified, or has been modified only in ways explicitly requested by the Copyright Holder.
+Modified Version
+Means the Package, if it has been changed, and such changes were not explicitly requested by the Copyright Holder.
+License
+You are permitted to use the Standard Version and create and use Modified Versions for any purpose without restriction, provided that you do not Distribute the Modified Version.
+
+You may Distribute verbatim copies of the Source form of the Standard Version of this Package in any medium without restriction, either gratis or for a Distributor Fee, provided that you duplicate all of the original copyright notices and associated disclaimers and also include the original readme.txt file. At your discretion, such verbatim copies may or may not include a Compiled form of the Package.
+
+Any use, modification, and distribution of the Standard or Modified Versions is governed by this Artistic License. By using, modifying or distributing the Package, you accept this license. Do not use, modify, or distribute the Package, if you do not accept this license.
+
+This license does not grant you the right to use any trademark, service mark, tradename, or logo of the Copyright Holder.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
