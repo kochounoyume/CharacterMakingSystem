@@ -10,7 +10,7 @@ namespace CharacterMakingSystem.UI
     /// <summary>
     /// タブボタンの管理クラス
     /// </summary>
-    public class TabBtns : MonoBehaviour
+    public class TabBtnsManager : MonoBehaviour
     {
         [SerializeField, Tooltip("スクロールバーの消えていくアニメーションの所要時間")]
         private float animDuration = 0.5f;
