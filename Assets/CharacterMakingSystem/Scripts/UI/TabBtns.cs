@@ -8,9 +8,9 @@ using UniRx;
 namespace CharacterMakingSystem.UI
 {
     /// <summary>
-    /// タブボタンの管理ビュークラス
+    /// タブボタンの管理クラス
     /// </summary>
-    public class TabBtnsView : MonoBehaviour
+    public class TabBtns : MonoBehaviour
     {
         [SerializeField, Tooltip("スクロールバーの消えていくアニメーションの所要時間")]
         private float animDuration = 0.5f;

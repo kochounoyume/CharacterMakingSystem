@@ -4,9 +4,9 @@ using UnityEngine.UI;
 namespace CharacterMakingSystem.UI
 {
     /// <summary>
-    /// HSVで色を表すスライダー群のビュークラス
+    /// HSVで色を表すスライダー群
     /// </summary>
-    public class ColorSlidersView : MonoBehaviour
+    public class ColorSliders : MonoBehaviour
     {
         [SerializeField, Tooltip("色・鮮やかさ・明るさ用スライダー")]
         private Slider color, saturation, brightness = null;
