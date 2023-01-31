@@ -9,7 +9,7 @@ namespace CharacterMakingSystem.CoreSystem
     /// <summary>
     /// 要求されたアセットをロードして、メモリのキャッシュに貯蓄し、Disposeされるまで保持する
     /// </summary>
-    public class AssetLoader : IAssetLoader
+    public sealed class AssetLoader : IAssetLoader
     {
         // ロードされたアセットを保持持続する参照リスト
         private readonly List<AssetReference> cacheReferences = new List<AssetReference>();

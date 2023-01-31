@@ -15,11 +15,11 @@ public class Test : MonoBehaviour
     [SerializeField] private GameObject obj = null;
     [SerializeField] private Gender _gender;
     [SerializeField] private int _faceID ;
-    private TextMeshProUGUI systemText = null;
+    //private TextMeshProUGUI systemText = null;
 
     private async UniTaskVoid Start()
     {
-        systemText=FindObjectOfType<TextMeshProUGUI>();
+        //systemText=FindObjectOfType<TextMeshProUGUI>();
         
         var data = database.FindFaceData(_gender, _faceID);
         obj = await assetLoader.LoadAsync<GameObject>(data.address);
@@ -35,7 +35,7 @@ public class Test : MonoBehaviour
         float mem = (Profiler.GetTotalAllocatedMemoryLong() >> 10) / 1024f;
         float unused = (Profiler.GetTotalUnusedReservedMemoryLong() >> 10) / 1024f;
 
-        systemText.text = fps.ToString("0.00") + " FPS\nMemory: " + mem + " / " + unused;
+        //systemText.text = fps.ToString("0.00") + " FPS\nMemory: " + mem + " / " + unused;
     }
 
     private GameObject FindObjData(GameObject target,GameObject[] gameObjects)

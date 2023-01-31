@@ -3,11 +3,12 @@ using Zenject;
 
 namespace CharacterMakingSystem.CoreSystem
 {
-    public class AssetLoaderInstaller : MonoInstaller
+    public class ContainerInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
             Container.BindInterfacesTo<AssetLoader>().AsCached();
+            Container.BindInterfacesTo<SceneController>().AsCached();
         }
     }
 }
