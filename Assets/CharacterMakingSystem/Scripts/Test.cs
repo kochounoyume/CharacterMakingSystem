@@ -22,7 +22,7 @@ public class Test : MonoBehaviour
         //systemText=FindObjectOfType<TextMeshProUGUI>();
         
         var data = database.FindFaceData(_gender, _faceID);
-        obj = await assetLoader.LoadAsync<GameObject>(data.address);
+        obj = await assetLoader.LoadAsync<GameObject>(data.Address);
         // assetLoader.LoadAsync<GameObject>(data.address).ToObservable().Subscribe(load =>
         // {
         //     obj = load;

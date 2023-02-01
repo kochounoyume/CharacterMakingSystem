@@ -24,7 +24,7 @@ namespace CharacterMakingSystem.Data
         /// <returns></returns>
         public FaceData FindFaceData(Gender gender, int faceID)
         {
-            return Array.Find(faceDatas, data => data.gender == gender && data.faceID == faceID);
+            return Array.Find(faceDatas, data => data.Gender == gender && data.FaceID == faceID);
         }
         
         /// <summary>
@@ -35,7 +35,7 @@ namespace CharacterMakingSystem.Data
         /// <returns></returns>
         public HairData FindHairData(Gender gender, int hairID)
         {
-            return Array.Find(hairDatas, data => data.gender == gender && data.hairID == hairID);
+            return Array.Find(hairDatas, data => data.Gender == gender && data.HairID == hairID);
         }
         
         public override void InstallBindings()

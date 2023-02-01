@@ -9,30 +9,45 @@ namespace CharacterMakingSystem.Data
     [System.Serializable]
     public sealed class HairData
     {
+        [SerializeField, Tooltip("性別")]
+        private Gender gender;
+
         /// <summary>
         /// 性別
         /// </summary>
-        public Gender gender;
+        public Gender Gender => gender;
+
+        [SerializeField, Tooltip("髪型のID")]
+        private int hairID;
 
         /// <summary>
         /// 髪型のID
         /// </summary>
-        public int hairID;
+        public int HairID => hairID;
+        
+        [SerializeField, Tooltip("プレファブのAddressableでのアドレス")]
+        private AssetReferenceT<GameObject> address;
 
         /// <summary>
         /// プレファブのAddressableでのアドレス
         /// </summary>
-        public AssetReferenceT<GameObject> address;
+        public AssetReferenceT<GameObject> Address => address;
+
+        [SerializeField, Tooltip("ベースヘアーが必要ならtrue")]
+        private bool baseHair;
 
         /// <summary>
         /// ベースヘアーが必要ならtrue
         /// </summary>
-        public bool baseHair;
+        public bool BaseHair => baseHair;
         
+        [SerializeField, Tooltip("素体に最初から付属している部位であればtrue")]
+        private bool defaultPart;
+
         /// <summary>
         /// 素体に最初から付属している部位であればtrue
         /// </summary>
-        public bool defaultPart;
+        public bool DefaultPart => defaultPart;
 
         /// <summary>
         /// キャラクターメイキングの髪型のデータのコンストラクタ

@@ -9,25 +9,37 @@ namespace CharacterMakingSystem.Data
     [System.Serializable]
     public sealed class FaceData
     {
+        [SerializeField, Tooltip("性別")]
+        private Gender gender;
+
         /// <summary>
         /// 性別
         /// </summary>
-        public Gender gender;
+        public Gender Gender => gender;
         
+        [SerializeField, Tooltip("顔セットのID")]
+        private int faceID;
+
         /// <summary>
         /// 顔セットのID
         /// </summary>
-        public int faceID;
+        public int FaceID => faceID;
         
+        [SerializeField, Tooltip("プレファブのAddressableでのアドレス")]
+        private AssetReferenceT<GameObject> address;
+
         /// <summary>
         /// プレファブのAddressableでのアドレス
         /// </summary>
-        public AssetReferenceT<GameObject> address;
+        public AssetReferenceT<GameObject> Address => address;
         
+        [SerializeField, Tooltip("素体に最初から付属している部位であればtrue")]
+        private bool defaultPart;
+
         /// <summary>
         /// 素体に最初から付属している部位であればtrue
         /// </summary>
-        public bool defaultPart;
+        public bool DefaultPart => defaultPart;
 
         /// <summary>
         /// キャラクターメイキングの顔セットのデータのコンストラクタ
