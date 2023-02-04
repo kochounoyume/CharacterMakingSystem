@@ -117,20 +117,21 @@ namespace CharacterMakingSystem.Stage
         /// </summary>
         /// <param name="prefab">生成したいプレファブ</param>
         /// <param name="part">該当部位</param>
-        public void InstantiateObj(GameObject prefab, Part part)
+        /// <param name="isRawBody">hairとfaceに同じオブジェクトを登録したいときtrue</param>
+        public void InstantiateObj(GameObject prefab, Part part, bool isRawBody = false)
         {
             switch (part)
             {
                 case Part.CostumeBody:
-                    SetObj(ref costumeBody);
+                    SetObj(ref costumeBody, BODY);
                     break;
                 
                 case Part.Face:
-                    SetObj(ref face);
+                    SetObj(ref face, FACE);
                     break;
                 
                 case Part.Hair:
-                    SetObj(ref hair);
+                    SetObj(ref hair, HAIR);
                     break;
                 
                 default:
@@ -138,10 +139,35 @@ namespace CharacterMakingSystem.Stage
                     break;
             }
 
-            void SetObj(ref GameObject obj)
+            void SetObj(ref GameObject obj, string partChild)
             {
-                Destroy(obj);
+                // rawbody使っていた場合、部位二つ持っているはずなので、間違って削除しないように対策
+                var isRawBodyCheck = new List<bool>(){obj == costumeBody, obj == face, obj == hair};
+                if (isRawBodyCheck.Count(_ => _) > 1)
+                {
+                    var child = obj.transform.Find(partChild);
+                    if (child != null)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                }
+                else
+                {
+                    Destroy(obj);
+                }
                 obj = Instantiate(prefab, playerArmature);
+                if (isRawBody)
+                {
+                    if (obj == hair)
+                    {
+                        face = obj;
+                    }
+                    else if(obj == face)
+                    {
+                        hair = obj;
+                    }
+                }
+                // もし重複しているプロパティがあっても、しっかり機能するはず
                 SetParameter(obj == costumeBody ? obj : null, obj == face ? obj : null, obj == hair ? obj : null);
             }
         }
@@ -160,7 +186,7 @@ namespace CharacterMakingSystem.Stage
         public void SetSkinColor(Color color) => skinColor.color = color;
 
         /// <summary>
-        /// 髪の色を変更する
+        /// 髪の色を変更する(後ろ髪があれば身体の部位が必要なことに注意)
         /// </summary>
         /// <param name="color"></param>
         public void SetHairColor(Color color)

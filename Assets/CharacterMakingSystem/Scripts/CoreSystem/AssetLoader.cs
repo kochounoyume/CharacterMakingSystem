@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Events;
 
 namespace CharacterMakingSystem.CoreSystem
 {
@@ -13,13 +14,14 @@ namespace CharacterMakingSystem.CoreSystem
     {
         // ロードされたアセットを保持持続する参照リスト
         private readonly List<AssetReference> cacheReferences = new List<AssetReference>();
-        
+
         /// <summary>
         /// 同時に同じものをロードしないように交通整理する
         /// </summary>
         /// <param name="assetReference">アセットの参照</param>
+        /// <param name="callback">コールバック（引数はロードしたオブジェクト）</param>
         /// <returns>ロードしたアセット</returns>
-        public async UniTask<TObject> LoadAsync<TObject>(AssetReference assetReference) where TObject : UnityEngine.Object
+        public async UniTask<TObject> LoadAsync<TObject>(AssetReference assetReference, UnityAction<TObject> callback = null) where TObject : UnityEngine.Object
         {
             // 指定されたアセットを既に参照していたらキャッシュから返す
             if (cacheReferences.Contains(assetReference))
@@ -36,7 +38,10 @@ namespace CharacterMakingSystem.CoreSystem
             try
             {
                 // ロードする
-                return await Addressables.LoadAssetAsync<TObject>(assetReference);
+                var result = await Addressables.LoadAssetAsync<TObject>(assetReference);
+                // コールバックがあれば起動することもできる
+                callback?.Invoke(result);
+                return result;
             }
             catch (System.Exception e)
             {
@@ -49,12 +54,10 @@ namespace CharacterMakingSystem.CoreSystem
         /// 同時に同じものをロードしないように交通整理する
         /// </summary>
         /// <param name="assetReference">アセットの参照</param>
+        /// <param name="callback">コールバック（引数はロードしたオブジェクト）</param>
         /// <returns>ロードしたアセット</returns>
-        public async UniTask<TObject> LoadAsync<TObject>(string assetReference) where TObject : UnityEngine.Object
-        {
-            return await LoadAsync<TObject>(new AssetReference(assetReference));
-        }
-
+        public async UniTask<TObject> LoadAsync<TObject>(string assetReference, UnityAction<TObject> callback = null) where TObject : UnityEngine.Object 
+            => await LoadAsync<TObject>(new AssetReference(assetReference), callback);
         public void Dispose()
         {
             // 参照リストのアセットのキャッシュを開放する

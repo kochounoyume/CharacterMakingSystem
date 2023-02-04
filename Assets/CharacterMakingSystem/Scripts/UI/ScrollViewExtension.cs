@@ -54,7 +54,7 @@ namespace CharacterMakingSystem.UI
 
             // 操作した時に表示されるScrollBar
             scrollRect
-                .OnPointerDownAsObservable()
+                .OnDragAsObservable()
                 .Subscribe(_ =>
                 {
                     foreach (var scrollbarData in scrollbarDatas)
@@ -71,7 +71,7 @@ namespace CharacterMakingSystem.UI
 
             // 手を離すとゆっくり消えていくタイプのScrollBarアニメーション
             scrollRect
-                .OnPointerUpAsObservable()
+                .OnEndDragAsObservable()
                 .Subscribe(_ =>
                 {
                     for (int i = 0; i < scrollbarDatas.Length; i++)

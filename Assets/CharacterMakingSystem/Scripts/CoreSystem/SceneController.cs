@@ -11,7 +11,7 @@ namespace CharacterMakingSystem.CoreSystem
     /// <summary>
     /// シーン遷移周りの管理クラス
     /// </summary>
-    public sealed class SceneController : MonoBehaviour, ISceneController
+    public sealed class SceneController : ISceneController
     {
         [Inject] private ZenjectSceneLoader zenjectSceneLoader;
 
