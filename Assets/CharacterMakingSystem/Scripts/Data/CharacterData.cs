@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CharacterMakingSystem.Data
@@ -49,9 +47,9 @@ namespace CharacterMakingSystem.Data
         /// </summary>
         public Color faceSkinColor { get; set; }
         
-        private static readonly Color defaultSkinColor = new Color(250 / 255, 235 / 255, 222 / 255);
-        private static readonly Color defaultHairColor = new Color(130 / 255, 90 / 255, 70 / 255);
-        private static readonly Color defaultEyeColor = new Color(158 / 255, 98 / 255, 51 / 255);
+        private static readonly Color defaultSkinColor = new Color(250f / 255f, 235f / 255f, 222f / 255f);
+        private static readonly Color defaultHairColor = new Color(130f / 255f, 90f / 255f, 70f / 255f);
+        private static readonly Color defaultEyeColor = new Color(158f / 255f, 98f / 255f, 51f / 255f);
 
         /// <summary>
         /// キャラクターの総合データクラスのコンストラクタ
@@ -89,6 +87,6 @@ namespace CharacterMakingSystem.Data
         /// RawBody使用時のアドレス重複検証
         /// </summary>
         /// <returns>trueなら重複している</returns>
-        public bool IsOverlap() => this.hairData.Address == this.faceData.Address;
+        public bool IsOverlap() => this.hairData.Address.ToString() == this.faceData.Address.ToString();
     }
 }

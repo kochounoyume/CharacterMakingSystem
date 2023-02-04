@@ -196,9 +196,9 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 4776801730295147836}
   m_AABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+    m_Center: {x: 0.0004897192, y: 1.4704908, z: -0.03547453}
+    m_Extent: {x: 0.1288172, y: 0.13486445, z: 0.13160354}
+  m_DirtyAABB: 0
 --- !u!1 &358782103716246558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,7 +1345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7196286150839849763
 Transform:
   m_ObjectHideFlags: 0
@@ -1495,9 +1495,9 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 4776801730295147836}
   m_AABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+    m_Center: {x: 0, y: 0.7917716, z: -0.00501401}
+    m_Extent: {x: 0.69447684, y: 0.7917717, z: 0.13295257}
+  m_DirtyAABB: 0
 --- !u!1 &3653835182985317868
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,9 +1821,9 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 4776801730295147836}
   m_AABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+    m_Center: {x: 0.000000022351742, y: 1.4563389, z: 0.015718319}
+    m_Extent: {x: 0.10882427, y: 0.114481926, z: 0.07130953}
+  m_DirtyAABB: 0
 --- !u!1 &4157078707937728571
 GameObject:
   m_ObjectHideFlags: 0
@@ -3013,6 +3013,7 @@ GameObject:
   - component: {fileID: 7915217198485375018}
   - component: {fileID: 2079641195252004038}
   - component: {fileID: 2752329822402541648}
+  - component: {fileID: 2083418670248301690}
   m_Layer: 8
   m_Name: RawBody_Girl2
   m_TagString: Untagged
@@ -3298,6 +3299,20 @@ MonoBehaviour:
       m_RotationOrder: 4
     CurveXRangeDegree: 90
     CurveYRangeDegree: 10
+--- !u!114 &2083418670248301690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328237571667442488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec54fa8fd80cc14189c2d9d1500f0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherAnimator: {fileID: 0}
+  isFindPlayer: 1
 --- !u!1 &7409894493009104957
 GameObject:
   m_ObjectHideFlags: 0

@@ -160,10 +160,12 @@ namespace CharacterMakingSystem.Stage
                 {
                     if (obj == hair)
                     {
+                        Destroy(face);
                         face = obj;
                     }
                     else if(obj == face)
                     {
+                        Destroy(hair);
                         hair = obj;
                     }
                 }
@@ -177,7 +179,7 @@ namespace CharacterMakingSystem.Stage
         /// </summary>
         /// <param name="scale">拡大比率（0~1）</param>
         public void SetScale(float scale) 
-            => playerArmature.localScale = scale is > 0 and < 1 ? new Vector3(scale, scale, scale) : playerArmature.localScale;
+            => playerArmature.localScale = scale is > 0 and < 1 ? new Vector3(scale*2, scale*2, scale*2) : playerArmature.localScale;
 
         /// <summary>
         /// 肌の色を変更する

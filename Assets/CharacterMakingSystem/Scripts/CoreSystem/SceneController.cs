@@ -1,8 +1,6 @@
-using System.Collections;
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -13,7 +11,10 @@ namespace CharacterMakingSystem.CoreSystem
     /// </summary>
     public sealed class SceneController : ISceneController
     {
-        [Inject] private ZenjectSceneLoader zenjectSceneLoader;
+        /// <summary>
+        /// 現在アクティブなシーン名を記録管理するリスト
+        /// </summary>
+        private List<string> activeSceneNames = new List<string>() {"Stage"};
 
         /// <summary>
         /// シーン名のテーブル
@@ -31,7 +32,9 @@ namespace CharacterMakingSystem.CoreSystem
         /// <summary>
         /// 基底シーンのシーン名
         /// </summary>
-        private const string SYSTEM_SCENE_NAME = "ChaMakSystem";
+        private const string BASE_SCENE = "Stage";
+        
+        [Inject] private ZenjectSceneLoader zenjectSceneLoader;
 
         /// <summary>
         /// 非同期でシーンをロードする
@@ -48,6 +51,9 @@ namespace CharacterMakingSystem.CoreSystem
         /// <param name="extraBindings">追加でバインドしたいデリゲート</param>
         public async UniTask LoadSceneAsync(string sceneName, Action<DiContainer> extraBindings = null)
         {
+            // 同じシーンをロードしないようにする
+            if (activeSceneNames.Contains(sceneName)) return;
+
             if (extraBindings != null)
             {
                 await zenjectSceneLoader.LoadSceneAsync(sceneName, LoadSceneMode.Additive, extraBindings);
@@ -56,6 +62,24 @@ namespace CharacterMakingSystem.CoreSystem
             {
                 await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
             }
+            
+            activeSceneNames.Add(sceneName);
+        }
+        
+        /// <summary>
+        /// シーンを削除する
+        /// </summary>
+        /// <param name="sceneName">削除したいシーン名</param>
+        public async UniTask UnloadSceneAsync(SceneName sceneName) => await UnloadSceneAsync(SceneNameTable[sceneName]);
+        
+        /// <summary>
+        /// シーンを削除する
+        /// </summary>
+        /// <param name="sceneName">削除したいシーン名</param>
+        public async UniTask UnloadSceneAsync(string sceneName)
+        {
+            await SceneManager.UnloadSceneAsync(sceneName);
+            activeSceneNames.Remove(sceneName);
         }
     }
 }
