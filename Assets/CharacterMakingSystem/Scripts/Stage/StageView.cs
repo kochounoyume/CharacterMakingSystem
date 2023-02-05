@@ -178,8 +178,20 @@ namespace CharacterMakingSystem.Stage
         /// プレイヤーの全体的な大きさを変更する
         /// </summary>
         /// <param name="scale">拡大比率（0~1）</param>
-        public void SetScale(float scale) 
-            => playerArmature.localScale = scale is > 0 and < 1 ? new Vector3(scale*2, scale*2, scale*2) : playerArmature.localScale;
+        public void SetScale(float scale)
+        {
+            var trueScale = ScaleConvert(scale);
+            playerArmature.localScale = scale is > 0 and < 1 ? new Vector3(trueScale, trueScale, trueScale) : playerArmature.localScale;
+        }
+
+        /// <summary>
+        /// プレイヤーの全体的な大きさが0になると大変なので、事前に設定した変更可能範囲内になるように数値を変換する
+        /// </summary>
+        /// <param name="target">変換する数値</param>
+        /// <param name="min">変更可能範囲の最小値</param>
+        /// <param name="max">変更可能範囲の最大値</param>
+        /// <returns>変換後の数値</returns>
+        private float ScaleConvert(float target, float min = 0.6f, float max = 1.4f) => min + (max - min) * target;
 
         /// <summary>
         /// 肌の色を変更する
