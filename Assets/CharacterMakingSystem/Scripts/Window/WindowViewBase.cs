@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 namespace CharacterMakingSystem.Window
 {
+    using CoreSystem;
+    
     /// <summary>
     /// 性別・外見・髪・顔の各Windowのビューの基底クラス
     /// </summary>
@@ -65,7 +67,8 @@ namespace CharacterMakingSystem.Window
         /// 次へ選択ボタンに処理を登録するメソッド
         /// </summary>
         /// <param name="func">メソッド</param>
-        public void SetFuncNextProgBtn(UnityAction func) =>
-            nextProgBtn.OnClickAsObservable().Subscribe(_ => func.Invoke());
+        /// <param name="sceneName">次のシーン名</param>
+        public void SetFuncNextProgBtn(UnityAction<SceneName> func, SceneName sceneName) =>
+            nextProgBtn.OnClickAsObservable().Subscribe(_ => func.Invoke(sceneName));
     }
 }

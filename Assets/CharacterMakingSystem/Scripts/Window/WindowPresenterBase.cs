@@ -17,14 +17,15 @@ namespace CharacterMakingSystem.Window
         /// </summary>
         /// <param name="view">ビュークラス</param>
         /// <param name="funcData">各Windowで共通で使用する処理登録用のデータクラス</param>
-        protected void SetWindowFunc(WindowViewBase view, WindowBtnFuncData funcData)
+        /// <param name="nextScene">次のシーン名</param>
+        protected void SetWindowFunc(WindowViewBase view, WindowBtnFuncData funcData, CoreSystem.SceneName nextScene)
         {
             view.SetFuncSexBtn(funcData.sexBtnFunc);
             view.SetFuncLookBtn(funcData.lookBtnFunc);
             view.SetFuncHairBtn(funcData.hairBtnFunc);
             view.SetFuncFaceBtn(funcData.faceBtnFunc);
             view.SetFuncCreateProgBtn(funcData.createProgBtnFunc);
-            view.SetFuncNextProgBtn(funcData.nextProgBtnFunc);
+            view.SetFuncNextProgBtn(funcData.nextProgBtnFunc, nextScene);
         }
     }
 }

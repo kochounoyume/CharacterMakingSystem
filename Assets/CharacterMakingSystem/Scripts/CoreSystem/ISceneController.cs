@@ -41,5 +41,31 @@ namespace CharacterMakingSystem.CoreSystem
         /// </summary>
         /// <param name="sceneName">削除したいシーン名</param>
         UniTask UnloadSceneAsync(string sceneName);
+
+        /// <summary>
+        /// アクティブなシーン名を全取得
+        /// </summary>
+        /// <returns>シーン名文字列</returns>
+        string[] GetActiveScenes();
+
+        /// <summary>
+        /// アクティブなシーンのうち、sceneNameTableに登録してあるものを全取得する
+        /// </summary>
+        /// <returns>シーン名文字列</returns>
+        string[] GetActiveSceneNames();
+
+        /// <summary>
+        /// 任意のシーン以外のテーブルに登録されているシーンを返す
+        /// </summary>
+        /// <param name="sceneName">シーン名</param>
+        /// <returns>指定のシーン以外のシーン名群</returns>
+        string[] FindOtherSceneNames(SceneName sceneName);
+
+        /// <summary>
+        /// 任意のシーン以外のテーブルに登録されているシーンを返す
+        /// </summary>
+        /// <param name="sceneName">シーン名</param>
+        /// <returns>指定のシーン以外のシーン名群</returns>
+        string[] FindOtherSceneNames(string sceneName);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -33,6 +34,11 @@ namespace CharacterMakingSystem.Stage
         /// </summary>
         private CharacterData femaleData;
 
+        /// <summary>
+        /// 各ウィンドウで使用するシーン遷移処理統括管理クラス
+        /// </summary>
+        private WindowBtnFuncData windowBtnFuncData = null;
+
         [Inject] 
         private ChaPartDatabase database;
         
@@ -49,19 +55,69 @@ namespace CharacterMakingSystem.Stage
             maleData = new CharacterData(Gender.Male, database.FindDefaultHairData(Gender.Male), database.FindDefaultFaceData(Gender.Male));
             femaleData = new CharacterData(Gender.Female, database.FindDefaultHairData(Gender.Female), database.FindDefaultFaceData(Gender.Female));
             
-            // Todo:WindowBtnFuncDataを作成し、nullを置き換える
-
-            // 最初に性別選択シーンを起動
-            sceneController.LoadSceneAsync(SceneName.Sex, container =>
-            {
-                container.BindInstance(new SexWindowData(isMale, gender => SetSex(gender).Forget(), null)).WhenInjectedInto<SexWindowPresenter>();
-            });
+            // 
+            windowBtnFuncData = new WindowBtnFuncData(
+                sexBtnFunc: () => 
+                {
+                    SceneUnLoader(SceneName.Sex);
+                    sceneController.LoadSceneAsync(SceneName.Sex, container =>
+                    {
+                        container
+                            .BindInstance(new SexWindowData(isMale, gender => SetSex(gender).Forget(), windowBtnFuncData))
+                            .WhenInjectedInto<SexWindowPresenter>();
+                    });
+                },
+                lookBtnFunc: () =>
+                {
+                    SceneUnLoader(SceneName.Look);
+                    sceneController.LoadSceneAsync(SceneName.Look);
+                },
+                hairBtnFunc: () =>
+                {
+                    SceneUnLoader(SceneName.Hair);
+                    sceneController.LoadSceneAsync(SceneName.Hair);
+                    
+                },
+                faceBtnFunc: () =>
+                {
+                    SceneUnLoader(SceneName.Face);
+                    sceneController.LoadSceneAsync(SceneName.Face);
+                },
+                createProgBtnFunc: () =>
+                {
+                    SceneUnLoader(SceneName.Result);
+                    sceneController.LoadSceneAsync(SceneName.Result);
+                },
+                nextProgBtnFunc: _ =>
+                {
+                    SceneUnLoader(_);
+                    sceneController.LoadSceneAsync(_);
+                });
             
+            // 最初に性別選択シーンを起動
+            windowBtnFuncData.sexBtnFunc.Invoke();
+
             // 最初に配置しているのは女性キャラなので、色も整えておく
             stageView.SetSkinColor(femaleData.skinColor);
             stageView.SetHairColor(femaleData.hairColor);
             stageView.SetEyeColor(femaleData.eyeColor);
             stageView.SetFaceSkinColor(femaleData.faceSkinColor);
+        }
+
+        /// <summary>
+        /// 該当シーン以外のシーンを削除する
+        /// </summary>
+        /// <param name="sceneName"></param>
+        private void SceneUnLoader(SceneName sceneName)
+        {
+            var otherScenes = sceneController.FindOtherSceneNames(sceneName);
+            foreach (var activeScene in sceneController.GetActiveSceneNames())
+            {
+                if (otherScenes.Contains(activeScene))
+                {
+                    sceneController.UnloadSceneAsync(activeScene).Forget();
+                }
+            }
         }
 
         /// <summary>
