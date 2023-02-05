@@ -55,22 +55,83 @@ namespace CharacterMakingSystem.Stage
             maleData = new CharacterData(Gender.Male, database.FindDefaultHairData(Gender.Male), database.FindDefaultFaceData(Gender.Male));
             femaleData = new CharacterData(Gender.Female, database.FindDefaultHairData(Gender.Female), database.FindDefaultFaceData(Gender.Female));
             
-            // 
+            // シーン遷移関連の処理の設定
             windowBtnFuncData = new WindowBtnFuncData(
                 sexBtnFunc: () => 
                 {
                     SceneUnLoader(SceneName.Sex);
                     sceneController.LoadSceneAsync(SceneName.Sex, container =>
                     {
+                        // 登録する処理は性別変更のため、まるっとオブジェクトを切り替える
                         container
-                            .BindInstance(new SexWindowData(isMale, gender => SetSex(gender).Forget(), windowBtnFuncData))
+                            .BindInstance(new SexWindowData(
+                                isMale,
+                                async gender =>
+                                {
+                                    // 性別の変更がなければ流す
+                                    if((isMale && gender == Gender.Male) || (!isMale && gender == Gender.Female)) return;
+            
+                                    isMale = !isMale;
+                                    var (data, cos) 
+                                        = isMale 
+                                            ? (maleData, database.GetDefaultCos(Gender.Male)) 
+                                            : (femaleData, database.GetDefaultCos(Gender.Female));
+
+                                    bool isOverlap = data.IsOverlap();
+
+                                    var asyncList = new List<UniTask<GameObject>>()
+                                    {
+                                        assetLoader.LoadAsync<GameObject>(
+                                            cos, 
+                                            _ => stageView.InstantiateObj(_, StageView.Part.CostumeBody)),
+                                        assetLoader.LoadAsync<GameObject>(
+                                            data.hairData.Address, 
+                                            _ => stageView.InstantiateObj(_, StageView.Part.Hair, isOverlap))
+                                    };
+
+                                    // 重複生成回避
+                                    if (!isOverlap)
+                                    {
+                                        asyncList.Add(
+                                            assetLoader.LoadAsync<GameObject>(data.faceData.Address, 
+                                                _ => stageView.InstantiateObj(_, StageView.Part.Face)));
+                                    }
+            
+                                    await UniTask.WhenAll(asyncList);
+            
+                                    stageView.SetScale(data.bodyHeight);
+                                    stageView.SetSkinColor(data.skinColor);
+                                    stageView.SetHairColor(data.hairColor);
+                                    stageView.SetEyeColor(data.eyeColor);
+                                    stageView.SetFaceSkinColor(data.faceSkinColor);
+                                },
+                                windowBtnFuncData))
                             .WhenInjectedInto<SexWindowPresenter>();
                     });
                 },
                 lookBtnFunc: () =>
                 {
                     SceneUnLoader(SceneName.Look);
-                    sceneController.LoadSceneAsync(SceneName.Look);
+                    sceneController.LoadSceneAsync(SceneName.Look, container =>
+                    {
+                        var charaData = isMale ? maleData : femaleData;
+                        container
+                            .BindInstance(new LookWindowData(
+                                charaData.bodyHeight,
+                                _ =>
+                                {
+                                    charaData.bodyHeight = _;
+                                    stageView.SetScale(_);
+                                },
+                                charaData.skinColor,
+                                _ =>
+                                {
+                                    charaData.skinColor = _;
+                                    stageView.SetSkinColor(_);
+                                },
+                                windowBtnFuncData))
+                            .WhenInjectedInto<LookWindowPresenter>();
+                    });
                 },
                 hairBtnFunc: () =>
                 {
@@ -119,41 +180,5 @@ namespace CharacterMakingSystem.Stage
                 }
             }
         }
-
-        /// <summary>
-        /// 性別変更のため、まるっとオブジェクトを切り替える
-        /// </summary>
-        private async UniTask SetSex(Gender gender)
-        {
-            // 性別の変更がなければ流す
-            if((isMale && gender == Gender.Male) || (!isMale && gender == Gender.Female)) return;
-            
-            isMale = !isMale;
-            var (data, cos) = isMale ? (maleData, database.GetDefaultCos(Gender.Male)) : (femaleData, database.GetDefaultCos(Gender.Female));
-
-            bool isOverlap = data.IsOverlap();
-
-            var asyncList = new List<UniTask<GameObject>>()
-            {
-                assetLoader.LoadAsync<GameObject>(cos, _ => stageView.InstantiateObj(_, StageView.Part.CostumeBody)),
-                assetLoader.LoadAsync<GameObject>(data.hairData.Address, _ => stageView.InstantiateObj(_, StageView.Part.Hair, isOverlap))
-            };
-
-            // 重複生成回避
-            if (!isOverlap)
-            {
-                asyncList.Add(assetLoader.LoadAsync<GameObject>(data.faceData.Address, _ => stageView.InstantiateObj(_, StageView.Part.Face)));
-            }
-            
-            await UniTask.WhenAll(asyncList);
-            
-            stageView.SetScale(data.bodyHeight);
-            stageView.SetSkinColor(data.skinColor);
-            stageView.SetHairColor(data.hairColor);
-            stageView.SetEyeColor(data.eyeColor);
-            stageView.SetFaceSkinColor(data.faceSkinColor);
-        }
-        
-        
     }
 }

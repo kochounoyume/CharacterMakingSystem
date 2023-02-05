@@ -1,4 +1,6 @@
+using UniRx;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CharacterMakingSystem.UI
@@ -10,6 +12,26 @@ namespace CharacterMakingSystem.UI
     {
         [SerializeField, Tooltip("色・鮮やかさ・明るさ用スライダー")]
         private Slider color, saturation, brightness = null;
+
+        /// <summary>
+        /// コールバック
+        /// </summary>
+        private UnityAction<Color> onValueChanged = null;
+        
+        /// <summary>
+        /// コールバックの取得・設定
+        /// </summary>
+        public UnityAction<Color> OnValueChanged
+        {
+            get => onValueChanged;
+            set
+            {
+                onValueChanged = value;
+                color.OnValueChangedAsObservable().Subscribe(_ => value.Invoke(GetColor())).AddTo(this);
+                saturation.OnValueChangedAsObservable().Subscribe(_ => value.Invoke(GetColor())).AddTo(this);
+                brightness.OnValueChangedAsObservable().Subscribe(_ => value.Invoke(GetColor())).AddTo(this);
+            }
+        }
 
         /// <summary>
         /// HSVでSliderで指定した色をRGBで返す

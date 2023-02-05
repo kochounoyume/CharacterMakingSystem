@@ -21,10 +21,10 @@ namespace CharacterMakingSystem.Window
         private SexWindowData data;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             base.SetWindowFunc(sexWindowView, data.windowBtnFuncData, CoreSystem.SceneName.Look);
-            sexWindowView.SetSexBtn(minSizeRatio, maxSizeRatio, animTime, data.genderFunc);
+            sexWindowView.SetSexBtns(minSizeRatio, maxSizeRatio, animTime, data.genderFunc);
             sexWindowView.SetPushBtn(data.isCurrentMale ? Gender.Male : Gender.Female);
         }
     }
