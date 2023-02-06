@@ -136,8 +136,36 @@ namespace CharacterMakingSystem.Stage
                 hairBtnFunc: () =>
                 {
                     SceneUnLoader(SceneName.Hair);
-                    sceneController.LoadSceneAsync(SceneName.Hair);
-                    
+                    sceneController.LoadSceneAsync(SceneName.Hair, container =>
+                    {
+                        var charaData = isMale ? maleData : femaleData;
+                        container
+                            .BindInstance(new HairWindowData(
+                                charaData.gender,
+                                charaData.hairData.HairID,
+                                value =>
+                                {
+                                    var targetData = database.FindHairData(charaData.gender, value);
+                                    charaData.hairData = targetData;
+                                    assetLoader.LoadAsync<GameObject>(targetData.Address, _ => 
+                                    {
+                                        stageView.InstantiateObj(_, StageView.Part.Hair, targetData == database.FindDefaultHairData(charaData.gender));
+                                        stageView.SetHairColor(charaData.hairColor);
+                                        if (stageView.GetFaceSkinColor() != charaData.faceSkinColor)
+                                        {
+                                            stageView.SetFaceSkinColor(charaData.faceSkinColor);
+                                        }
+                                    }).Forget();
+                                },
+                                charaData.hairColor,
+                                _ =>
+                                {
+                                    charaData.hairColor = _;
+                                    stageView.SetHairColor(_);
+                                },
+                                windowBtnFuncData))
+                            .WhenInjectedInto<HairWindowPresenter>();
+                    });
                 },
                 faceBtnFunc: () =>
                 {

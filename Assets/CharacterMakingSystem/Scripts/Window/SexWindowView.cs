@@ -37,7 +37,7 @@ namespace CharacterMakingSystem.Window
         /// <param name="maxSizeRatio">最大拡大率</param>
         /// <param name="duration">アニメーション再生時間</param>
         /// <param name="func">ボタン押下時に起動する処理</param>
-        public void SetSexBtns(float minSizeRatio, float maxSizeRatio, float duration, UnityAction<Data.Gender> func = null)
+        public void SetSexWindow(float minSizeRatio, float maxSizeRatio, float duration, UnityAction<Data.Gender> func = null)
         {
             var btnSize = btnElements.FirstOrDefault().btnRect.sizeDelta;
             var btnMinSize = btnSize * minSizeRatio;
@@ -74,8 +74,9 @@ namespace CharacterMakingSystem.Window
         /// <param name="gender">性別情報</param>
         public void SetPushBtn(Data.Gender gender)
         {
+            if (!isFirst) return;
             Array.Find(btnElements, element => element.gender == gender).btn.onClick.Invoke();
-            isFirst = isFirst ? false : isFirst;
+            isFirst = false;
         }
     }
 }

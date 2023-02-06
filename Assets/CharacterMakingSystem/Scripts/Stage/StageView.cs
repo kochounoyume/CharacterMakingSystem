@@ -222,5 +222,11 @@ namespace CharacterMakingSystem.Stage
         /// </summary>
         /// <param name="color"></param>
         public void SetFaceSkinColor(Color color) => faceSkinColor.color = color;
+
+        /// <summary>
+        /// 顔の肌の色を取得する
+        /// </summary>
+        /// <returns></returns>
+        public Color GetFaceSkinColor() => faceSkinColor.color;
     }
 }

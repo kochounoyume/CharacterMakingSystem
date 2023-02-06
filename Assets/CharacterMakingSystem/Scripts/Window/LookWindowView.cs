@@ -25,7 +25,7 @@ namespace CharacterMakingSystem.Window
         /// <param name="bodyHeightFunc">身長編集処理</param>
         /// <param name="skinColor">肌の色情報</param>
         /// <param name="skinColorFunc">肌の色変更処理</param>
-        public void SetLookSliders(float bodyHeight, UnityAction<float> bodyHeightFunc, Color skinColor, UnityAction<Color> skinColorFunc)
+        public void SetLookWindow(float bodyHeight, UnityAction<float> bodyHeightFunc, Color skinColor, UnityAction<Color> skinColorFunc)
         {
             bodyHeightSlider.value = bodyHeight;
             bodyHeightSlider.OnValueChangedAsObservable().Subscribe(bodyHeightFunc.Invoke).AddTo(this);

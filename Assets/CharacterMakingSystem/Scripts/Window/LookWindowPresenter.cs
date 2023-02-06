@@ -20,7 +20,7 @@ namespace CharacterMakingSystem.Window
         private void Start()
         {
             base.SetWindowFunc(lookWindowView, data.windowBtnFuncData, CoreSystem.SceneName.Hair);
-            lookWindowView.SetLookSliders(data.bodyHeight, data.bodyHeightFunc, data.skinColor, data.skinColorFunc);
+            lookWindowView.SetLookWindow(data.bodyHeight, data.bodyHeightFunc, data.skinColor, data.skinColorFunc);
         }
     }
 }

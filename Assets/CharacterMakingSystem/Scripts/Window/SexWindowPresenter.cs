@@ -24,7 +24,7 @@ namespace CharacterMakingSystem.Window
         private void Start()
         {
             base.SetWindowFunc(sexWindowView, data.windowBtnFuncData, CoreSystem.SceneName.Look);
-            sexWindowView.SetSexBtns(minSizeRatio, maxSizeRatio, animTime, data.genderFunc);
+            sexWindowView.SetSexWindow(minSizeRatio, maxSizeRatio, animTime, data.genderFunc);
             sexWindowView.SetPushBtn(data.isCurrentMale ? Gender.Male : Gender.Female);
         }
     }
