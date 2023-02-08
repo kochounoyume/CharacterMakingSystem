@@ -58,7 +58,14 @@ namespace CharacterMakingSystem.CoreSystem
                 await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
             }
         }
-        
+
+        /// <summary>
+        /// 非同期で基底シーンをロードする
+        /// </summary>
+        /// <param name="extraBindings">追加でバインドしたいデリゲート</param>
+        public async UniTask LoadBaseSceneAsync(Action<DiContainer> extraBindings = null) 
+            => await LoadSceneAsync(BASE_SCENE, extraBindings);
+
         /// <summary>
         /// シーンを削除する
         /// </summary>

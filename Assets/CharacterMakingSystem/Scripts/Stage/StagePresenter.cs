@@ -18,6 +18,9 @@ namespace CharacterMakingSystem.Stage
         [SerializeField, Tooltip("ビュークラス")] 
         private StageView stageView = null;
 
+        [SerializeField, Tooltip("仮想カメラの設定クラス")]
+        private VcamManager vCamManager = null;
+
         /// <summary>
         /// 性別管理変数
         /// </summary>
@@ -59,6 +62,7 @@ namespace CharacterMakingSystem.Stage
                 sexBtnFunc: () => 
                 {
                     SceneUnLoader(SceneName.Sex);
+                    vCamManager.SetVcam((int)VcamManager.Vcam.defaultCam);
                     sceneController.LoadSceneAsync(SceneName.Sex, container =>
                     {
                         // 登録する処理は性別変更のため、まるっとオブジェクトを切り替える
@@ -126,6 +130,7 @@ namespace CharacterMakingSystem.Stage
                 lookBtnFunc: () =>
                 {
                     SceneUnLoader(SceneName.Look);
+                    vCamManager.SetVcam((int)VcamManager.Vcam.lookCam);
                     sceneController.LoadSceneAsync(SceneName.Look, container =>
                     {
                         var charaData = isMale ? maleData : femaleData;
@@ -150,6 +155,7 @@ namespace CharacterMakingSystem.Stage
                 hairBtnFunc: () =>
                 {
                     SceneUnLoader(SceneName.Hair);
+                    vCamManager.SetVcam((int)VcamManager.Vcam.hairCam);
                     sceneController.LoadSceneAsync(SceneName.Hair, container =>
                     {
                         var charaData = isMale ? maleData : femaleData;
@@ -186,6 +192,7 @@ namespace CharacterMakingSystem.Stage
                 faceBtnFunc: () =>
                 {
                     SceneUnLoader(SceneName.Face);
+                    vCamManager.SetVcam((int)VcamManager.Vcam.faceCam);
                     sceneController.LoadSceneAsync(SceneName.Face, container =>
                     {
                         var charaData = isMale ? maleData : femaleData;
@@ -228,8 +235,12 @@ namespace CharacterMakingSystem.Stage
                 },
                 createProgBtnFunc: () =>
                 {
+                    vCamManager.SetVcam((int)VcamManager.Vcam.defaultCam);
                     SceneUnLoader(SceneName.Result);
-                    sceneController.LoadSceneAsync(SceneName.Result);
+                    sceneController.LoadSceneAsync(SceneName.Result, container =>
+                    {
+                        var charaData = isMale ? maleData : femaleData;
+                    });
                 },
                 nextProgBtnFunc: _ =>
                 {

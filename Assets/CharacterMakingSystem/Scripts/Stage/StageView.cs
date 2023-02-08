@@ -21,7 +21,7 @@ namespace CharacterMakingSystem.Stage
 
         [SerializeField, Tooltip("髪")] 
         private GameObject hair = null;
-
+        
         /// <summary>
         /// 肌の色変更用マテリアル
         /// </summary>
@@ -199,7 +199,7 @@ namespace CharacterMakingSystem.Stage
         /// <param name="min">変更可能範囲の最小値</param>
         /// <param name="max">変更可能範囲の最大値</param>
         /// <returns>変換後の数値</returns>
-        private float ScaleConvert(float target, float min = 0.6f, float max = 1.4f) => min + (max - min) * target;
+        private float ScaleConvert(float target, float min = 0.9f, float max = 1.05f) => min + (max - min) * target;
 
         /// <summary>
         /// 肌の色を変更する

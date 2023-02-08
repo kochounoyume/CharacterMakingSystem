@@ -6,7 +6,6 @@ namespace CharacterMakingSystem.CoreSystem
 {
     public enum SceneName
     {
-        Stage,
         Sex,
         Face,
         Look,
@@ -29,6 +28,12 @@ namespace CharacterMakingSystem.CoreSystem
         /// <param name="sceneName">表示したいシーン名</param>
         /// <param name="extraBindings">追加でバインドしたいデリゲート</param>
         UniTask LoadSceneAsync(string sceneName, Action<DiContainer> extraBindings = null);
+
+        /// <summary>
+        /// 非同期で基底シーンをロードする
+        /// </summary>
+        /// <param name="extraBindings">追加でバインドしたいデリゲート</param>
+        UniTask LoadBaseSceneAsync(Action<DiContainer> extraBindings = null);
 
         /// <summary>
         /// シーンを削除する
