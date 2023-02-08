@@ -29,8 +29,8 @@ namespace CharacterMakingSystem.Window
         /// 髪選択シーンに必要な各種UIに設定をする
         /// </summary>
         /// <param name="hairBtnFunc">髪型を変更するボタンに紐づける処理</param>
-        /// <param name="hairColor">肌の色情報</param>
-        /// <param name="hairColorFunc">肌の色を変更する処理</param>
+        /// <param name="hairColor">髪の色情報</param>
+        /// <param name="hairColorFunc">髪の色を変更する処理</param>
         public void SetHairView(UnityAction<int> hairBtnFunc, Color hairColor, UnityAction<Color> hairColorFunc)
         {
             // 選択したボタンはアウトライン機能を使う

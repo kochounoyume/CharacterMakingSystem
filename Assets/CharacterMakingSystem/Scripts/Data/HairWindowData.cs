@@ -42,7 +42,6 @@ namespace CharacterMakingSystem.Data
         /// <param name="hairColorFunc">肌の色を変更する処理</param>
         /// <param name="windowBtnFuncData">各Windowで共通で使用する処理登録用のデータクラス</param>
         public HairWindowData(
-            Gender gender,
             int hairId,
             UnityAction<int> hairBtnFunc, 
             Color hairColor, 

@@ -169,6 +169,14 @@ namespace CharacterMakingSystem.Stage
                         hair = obj;
                     }
                 }
+                else // 単体部位で生成時
+                {
+                    var nonChild = obj.transform.Find(partChild == HAIR ? FACE : HAIR);
+                    if (nonChild != null)
+                    {
+                        nonChild.gameObject.SetActive(false);
+                    }
+                }
                 // もし重複しているプロパティがあっても、しっかり機能するはず
                 SetParameter(obj == costumeBody ? obj : null, obj == face ? obj : null, obj == hair ? obj : null);
             }
@@ -200,6 +208,12 @@ namespace CharacterMakingSystem.Stage
         public void SetSkinColor(Color color) => skinColor.color = color;
 
         /// <summary>
+        /// 肌の色を取得する
+        /// </summary>
+        /// <returns></returns>
+        public Color GetSkinColor() => skinColor.color;
+
+        /// <summary>
         /// 髪の色を変更する(後ろ髪があれば身体の部位が必要なことに注意)
         /// </summary>
         /// <param name="color"></param>
@@ -212,10 +226,22 @@ namespace CharacterMakingSystem.Stage
         }
 
         /// <summary>
+        /// 髪の色を取得する
+        /// </summary>
+        /// <returns></returns>
+        public Color GetHairColor() => hairColors.FirstOrDefault()!.color;
+
+        /// <summary>
         /// 瞳の色を変更する
         /// </summary>
         /// <param name="color"></param>
         public void SetEyeColor(Color color) => eyeColor.color = color;
+
+        /// <summary>
+        /// 瞳の色を取得する
+        /// </summary>
+        /// <returns></returns>
+        public Color GetEyeColor() => eyeColor.color;
 
         /// <summary>
         /// 顔の肌の色を変更する

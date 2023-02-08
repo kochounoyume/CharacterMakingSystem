@@ -50,7 +50,7 @@ namespace CharacterMakingSystem.Stage
 
         // Start is called before the first frame update
         void Start()
-        {
+        { 
             // デフォルトの男性・女性用データ登録
             maleData = new CharacterData(Gender.Male, database.FindDefaultHairData(Gender.Male), database.FindDefaultFaceData(Gender.Male));
             femaleData = new CharacterData(Gender.Female, database.FindDefaultHairData(Gender.Female), database.FindDefaultFaceData(Gender.Female));
@@ -72,12 +72,12 @@ namespace CharacterMakingSystem.Stage
                                     if((isMale && gender == Gender.Male) || (!isMale && gender == Gender.Female)) return;
             
                                     isMale = !isMale;
-                                    var (data, cos) 
+                                    var (charaData, cos) 
                                         = isMale 
                                             ? (maleData, database.GetDefaultCos(Gender.Male)) 
                                             : (femaleData, database.GetDefaultCos(Gender.Female));
 
-                                    bool isOverlap = data.IsOverlap();
+                                    bool isOverlap = charaData.IsOverlap();
 
                                     var asyncList = new List<UniTask<GameObject>>()
                                     {
@@ -85,7 +85,7 @@ namespace CharacterMakingSystem.Stage
                                             cos, 
                                             _ => stageView.InstantiateObj(_, StageView.Part.CostumeBody)),
                                         assetLoader.LoadAsync<GameObject>(
-                                            data.hairData.Address, 
+                                            charaData.hairData.Address, 
                                             _ => stageView.InstantiateObj(_, StageView.Part.Hair, isOverlap))
                                     };
 
@@ -93,17 +93,32 @@ namespace CharacterMakingSystem.Stage
                                     if (!isOverlap)
                                     {
                                         asyncList.Add(
-                                            assetLoader.LoadAsync<GameObject>(data.faceData.Address, 
-                                                _ => stageView.InstantiateObj(_, StageView.Part.Face)));
+                                            assetLoader.LoadAsync<GameObject>(charaData.faceData.Address,
+                                                _ => 
+                                                    stageView.InstantiateObj(
+                                                        _, 
+                                                        StageView.Part.Face)));
                                     }
             
                                     await UniTask.WhenAll(asyncList);
             
-                                    stageView.SetScale(data.bodyHeight);
-                                    stageView.SetSkinColor(data.skinColor);
-                                    stageView.SetHairColor(data.hairColor);
-                                    stageView.SetEyeColor(data.eyeColor);
-                                    stageView.SetFaceSkinColor(data.faceSkinColor);
+                                    stageView.SetScale(charaData.bodyHeight);
+                                    if (stageView.GetSkinColor() != charaData.skinColor)
+                                    {
+                                        stageView.SetSkinColor(charaData.skinColor);
+                                    }
+                                    if (stageView.GetHairColor() != charaData.hairColor)
+                                    {
+                                        stageView.SetHairColor(charaData.hairColor);
+                                    }
+                                    if (stageView.GetEyeColor() != charaData.eyeColor)
+                                    {
+                                        stageView.SetEyeColor(charaData.eyeColor);
+                                    }
+                                    if (stageView.GetFaceSkinColor() != charaData.faceSkinColor)
+                                    {
+                                        stageView.SetFaceSkinColor(charaData.faceSkinColor);
+                                    }
                                 },
                                 windowBtnFuncData))
                             .WhenInjectedInto<SexWindowPresenter>();
@@ -141,7 +156,6 @@ namespace CharacterMakingSystem.Stage
                         var charaData = isMale ? maleData : femaleData;
                         container
                             .BindInstance(new HairWindowData(
-                                charaData.gender,
                                 charaData.hairData.HairID,
                                 value =>
                                 {
@@ -150,7 +164,10 @@ namespace CharacterMakingSystem.Stage
                                     assetLoader.LoadAsync<GameObject>(targetData.Address, _ => 
                                     {
                                         stageView.InstantiateObj(_, StageView.Part.Hair, targetData == database.FindDefaultHairData(charaData.gender));
-                                        stageView.SetHairColor(charaData.hairColor);
+                                        if (stageView.GetHairColor() != charaData.hairColor)
+                                        {
+                                            stageView.SetHairColor(charaData.hairColor);
+                                        }
                                         if (stageView.GetFaceSkinColor() != charaData.faceSkinColor)
                                         {
                                             stageView.SetFaceSkinColor(charaData.faceSkinColor);
@@ -170,7 +187,45 @@ namespace CharacterMakingSystem.Stage
                 faceBtnFunc: () =>
                 {
                     SceneUnLoader(SceneName.Face);
-                    sceneController.LoadSceneAsync(SceneName.Face);
+                    sceneController.LoadSceneAsync(SceneName.Face, container =>
+                    {
+                        var charaData = isMale ? maleData : femaleData;
+                        container
+                            .BindInstance(new FaceWindowData(
+                                charaData.faceData.FaceID,
+                                value =>
+                                {
+                                    var targetData = database.FindFaceData(charaData.gender, value);
+                                    charaData.faceData = targetData;
+                                    assetLoader.LoadAsync<GameObject>(targetData.Address, _ =>
+                                    {
+                                        stageView.InstantiateObj(_, StageView.Part.Face, targetData == database.FindDefaultFaceData(charaData.gender));
+                                        if (stageView.GetHairColor() != charaData.hairColor)
+                                        {
+                                            stageView.SetHairColor(charaData.hairColor);
+                                        }
+
+                                        if (stageView.GetFaceSkinColor() != charaData.faceSkinColor)
+                                        {
+                                            stageView.SetFaceSkinColor(charaData.faceSkinColor);
+                                        }
+                                    }).Forget();
+                                },
+                                charaData.faceSkinColor,
+                                _ =>
+                                {
+                                    charaData.faceSkinColor = _;
+                                    stageView.SetFaceSkinColor(_);
+                                },
+                                charaData.eyeColor,
+                                _ =>
+                                {
+                                    charaData.eyeColor = _;
+                                    stageView.SetEyeColor(_);
+                                },
+                                windowBtnFuncData))
+                            .WhenInjectedInto<FaceWindowPresenter>();
+                    });
                 },
                 createProgBtnFunc: () =>
                 {
