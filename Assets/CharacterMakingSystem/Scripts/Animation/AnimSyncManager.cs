@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 
@@ -9,24 +10,56 @@ namespace CharacterMakingSystem.Animation
     [RequireComponent(typeof(Animator))]
     public class AnimSyncManager : MonoBehaviour
     {
-        // 同期のターゲットとなるアニメーター
-        [SerializeField] private Animator otherAnimator = null;
+        [SerializeField, Tooltip("同期のターゲットとなるアニメーター")] 
+        private Animator otherAnimator = null;
+        
+        [SerializeField, Tooltip("自動でotherAnimatorにPlayerのタグのゲームオブジェクトのAnimatorを取得するかどうかのフラグ変数")]
+        private bool isFindPlayer = true;
 
-        // trueにすると自動でotherAnimatorにPlayerのタグのゲームオブジェクトのAnimatorを取得する
-        [SerializeField] private bool isFindPlayer = true;
+        /// <summary>
+        /// 同期するアニメーター
+        /// </summary>
+        private Animator animator = null;
 
+        /// <summary>
+        /// 全同期対象のアニメーターを管理するリスト
+        /// </summary>
+        private static List<Animator> syncAnimators = new List<Animator>();
+
+        /// <summary>
+        /// 該当のアニメーションコントローラーレイヤー
+        /// </summary>
+        private const int LAYER_INDEX = 0;
+        
+        /// <summary>
+        /// プレイヤーのタグ
+        /// </summary>
         private const string PLAYER = "Player";
 
         private void Start()
         {
             // 同期するアニメーターを取得
-            var animator = GetComponent<Animator>();
-            
+            animator = GetComponent<Animator>();
+
             // PlayerのAnimatorを取得
             if (isFindPlayer)
             {
-                otherAnimator = GameObject.FindWithTag(PLAYER).GetComponent<Animator>();
-                animator.runtimeAnimatorController = otherAnimator.runtimeAnimatorController;
+                var playerObj = GameObject.FindWithTag(PLAYER);
+                if (playerObj == null || !playerObj.TryGetComponent(out otherAnimator)) return;
+            }
+
+            animator.runtimeAnimatorController = otherAnimator.runtimeAnimatorController;
+            syncAnimators.Add(animator);
+
+            var info = otherAnimator.GetCurrentAnimatorStateInfo(LAYER_INDEX);
+            var nameHash = info.fullPathHash;
+            var normalizedTime = info.normalizedTime % 1; // ループしていると1以上になるので、小数点以下のみ抽出
+
+            foreach (var syncAnimator in syncAnimators)
+            {
+                syncAnimator.Play(nameHash, LAYER_INDEX, normalizedTime);
+                Debug.Log(nameHash);
+                //syncAnimator.Rebind();
             }
 
             // アニメーションによってはAnimationEventを吐いてエラーになることがあるので無効化する
@@ -77,5 +110,7 @@ namespace CharacterMakingSystem.Animation
                 } 
             }
         }
+
+        private void OnDestroy() => syncAnimators.Remove(animator);
     }
 }
