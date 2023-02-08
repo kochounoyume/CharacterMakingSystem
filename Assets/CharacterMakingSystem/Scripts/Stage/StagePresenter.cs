@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -55,7 +54,7 @@ namespace CharacterMakingSystem.Stage
             maleData = new CharacterData(Gender.Male, database.FindDefaultHairData(Gender.Male), database.FindDefaultFaceData(Gender.Male));
             femaleData = new CharacterData(Gender.Female, database.FindDefaultHairData(Gender.Female), database.FindDefaultFaceData(Gender.Female));
             
-            // シーン遷移関連の処理の設定
+            // シーン遷移関連の処理の設定(Stageシーン以外の処理は冗長化回避のためできる限り入れない)
             windowBtnFuncData = new WindowBtnFuncData(
                 sexBtnFunc: () => 
                 {
@@ -234,8 +233,27 @@ namespace CharacterMakingSystem.Stage
                 },
                 nextProgBtnFunc: _ =>
                 {
-                    SceneUnLoader(_);
-                    sceneController.LoadSceneAsync(_);
+                    switch (_)
+                    {
+                        case SceneName.Sex:
+                            windowBtnFuncData.sexBtnFunc.Invoke();
+                            break;
+                        case SceneName.Look:
+                            windowBtnFuncData.lookBtnFunc.Invoke();
+                            break;
+                        case SceneName.Hair:
+                            windowBtnFuncData.hairBtnFunc.Invoke();
+                            break;
+                        case SceneName.Face:
+                            windowBtnFuncData.faceBtnFunc.Invoke();
+                            break;
+                        case SceneName.Result:
+                            windowBtnFuncData.createProgBtnFunc.Invoke();
+                            break;
+                        default:
+                            Debug.LogError("シーン指定エラーです(SceneName.Stageおよびほかのシーン名は使用できません)");
+                            break;
+                    }
                 });
             
             // 最初に性別選択シーンを起動
