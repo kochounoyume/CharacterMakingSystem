@@ -201,8 +201,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11419617}
-  m_LocalRotation: {x: -0.040299036, y: -0.009533927, z: -0.0011902112, w: -0.9991415}
-  m_LocalPosition: {x: -0.050000966, y: 0.20000069, z: 0.29999903}
+  m_LocalRotation: {x: -0.024110762, y: 0.01736473, z: -0.0053755622, w: -0.9995441}
+  m_LocalPosition: {x: 0.019996434, y: 0.5190003, z: 2.504003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -426,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &146321569
 Transform:
   m_ObjectHideFlags: 0
@@ -682,7 +682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &460526799
 Transform:
   m_ObjectHideFlags: 0
@@ -816,7 +816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &707727457
 Transform:
   m_ObjectHideFlags: 0
@@ -1146,6 +1146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageView: {fileID: 958015541}
+  vCamManager: {fileID: 1348323760}
 --- !u!1 &977813124 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7328237571667442488, guid: 9b6622d465aa6dd458e0bc08674dfc4e, type: 3}
@@ -1267,6 +1268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1348323759}
+  - component: {fileID: 1348323760}
   m_Layer: 7
   m_Name: Cameras
   m_TagString: Untagged
@@ -1294,6 +1296,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1348323760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348323758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589a66217f0a34a43af6cb708c46f68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCam: {fileID: 2143829586}
+  lookCam: {fileID: 707727458}
+  hairCam: {fileID: 146321570}
+  faceCam: {fileID: 460526800}
 --- !u!1 &1415617435
 GameObject:
   m_ObjectHideFlags: 0
