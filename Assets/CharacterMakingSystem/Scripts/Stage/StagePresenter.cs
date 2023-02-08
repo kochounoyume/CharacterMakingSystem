@@ -41,10 +41,10 @@ namespace CharacterMakingSystem.Stage
         /// </summary>
         private WindowBtnFuncData windowBtnFuncData = null;
 
-        [Inject] 
+        [Inject]
         private ChaPartDatabase database;
         
-        [Inject] 
+        [Inject]
         private IAssetLoader assetLoader;
         
         [Inject]
