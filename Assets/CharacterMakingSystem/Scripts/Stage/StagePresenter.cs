@@ -9,6 +9,7 @@ namespace CharacterMakingSystem.Stage
     using Data;
     using CoreSystem;
     using Window;
+    using Result;
     
     /// <summary>
     /// 実際に3Dゲーム空間を扱うプレゼンタークラス
@@ -240,6 +241,12 @@ namespace CharacterMakingSystem.Stage
                     sceneController.LoadSceneAsync(SceneName.Result, container =>
                     {
                         var charaData = isMale ? maleData : femaleData;
+                        container
+                            .BindInstance(new ResultWindowData(() =>
+                            {
+                                Debug.Log("マーシー");
+                            }))
+                            .WhenInjectedInto<ResultWindowBase>();
                     });
                 },
                 nextProgBtnFunc: _ =>

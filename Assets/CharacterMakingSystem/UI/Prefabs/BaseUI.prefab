@@ -334,7 +334,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 97729893525146474, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
       propertyPath: m_Pivot.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 97729893525146474, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
       propertyPath: m_Pivot.y
@@ -362,7 +362,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 97729893525146474, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 115
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 97729893525146474, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -398,7 +398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 97729893525146474, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -280
+      value: -160
       objectReference: {fileID: 0}
     - target: {fileID: 97729893525146474, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1108,7 +1108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 97729893525146474, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 115
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 97729893525146474, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1162,6 +1162,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1076172760147428889, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f1edcfd3d10171d489cb1395305d4e27, type: 3}
     - target: {fileID: 4810814132619233685, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
       propertyPath: m_Name
       value: ProgButton_Next
@@ -1169,6 +1173,22 @@ PrefabInstance:
     - target: {fileID: 4932911117982643489, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
       propertyPath: m_text
       value: "\u3064\u304E\u3078"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987265563203052652, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987265563203052652, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987265563203052652, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987265563203052652, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99d902a04f081fa4d8444266c296358f, type: 3}
