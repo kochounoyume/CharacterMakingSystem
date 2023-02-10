@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -22,6 +21,9 @@ namespace CharacterMakingSystem.Stage
         [SerializeField, Tooltip("仮想カメラの設定クラス")]
         private VcamManager vCamManager = null;
 
+        [SerializeField, Tooltip("最終部分のアニメーション部分を制御するクラス")]
+        private LastAnimController lastAnimController = null;
+        
         /// <summary>
         /// 性別管理変数
         /// </summary>
@@ -51,12 +53,21 @@ namespace CharacterMakingSystem.Stage
         [Inject]
         private ISceneController sceneController;
 
+        [Inject]
+        private StageWindowData windowData;
+
         // Start is called before the first frame update
         void Start()
         { 
+            // 顔と髪型のデフォルト値取得
+            var defaultMaleHair = database.FindDefaultHairData(Gender.Male);
+            var defaultFemaleHair = database.FindDefaultHairData(Gender.Female);
+            var defaultMaleFace = database.FindDefaultFaceData(Gender.Male);
+            var defaultFemaleFace = database.FindDefaultFaceData(Gender.Female);
+            
             // デフォルトの男性・女性用データ登録
-            maleData = new CharacterData(Gender.Male, database.FindDefaultHairData(Gender.Male), database.FindDefaultFaceData(Gender.Male));
-            femaleData = new CharacterData(Gender.Female, database.FindDefaultHairData(Gender.Female), database.FindDefaultFaceData(Gender.Female));
+            maleData = new CharacterData(Gender.Male, defaultMaleHair, defaultMaleFace);
+            femaleData = new CharacterData(Gender.Female, defaultFemaleHair, defaultFemaleFace);
             
             // シーン遷移関連の処理の設定(Stageシーン以外の処理は冗長化回避のためできる限り入れない)
             windowBtnFuncData = new WindowBtnFuncData(
@@ -113,7 +124,7 @@ namespace CharacterMakingSystem.Stage
                                     }
                                     if (stageView.GetHairColor() != charaData.hairColor)
                                     {
-                                        stageView.SetHairColor(charaData.hairColor);
+                                        stageView.SetHairColor(charaData.hairColor, charaData.hairData.BaseHair);
                                     }
                                     if (stageView.GetEyeColor() != charaData.eyeColor)
                                     {
@@ -172,7 +183,7 @@ namespace CharacterMakingSystem.Stage
                                         stageView.InstantiateObj(_, StageView.Part.Hair, targetData == database.FindDefaultHairData(charaData.gender));
                                         if (stageView.GetHairColor() != charaData.hairColor)
                                         {
-                                            stageView.SetHairColor(charaData.hairColor);
+                                            stageView.SetHairColor(charaData.hairColor, charaData.hairData.BaseHair);
                                         }
                                     }).Forget();
                                 },
@@ -180,7 +191,7 @@ namespace CharacterMakingSystem.Stage
                                 _ =>
                                 {
                                     charaData.hairColor = _;
-                                    stageView.SetHairColor(_);
+                                    stageView.SetHairColor(_, charaData.hairData.BaseHair);
                                 },
                                 windowBtnFuncData))
                             .WhenInjectedInto<HairWindowPresenter>();
@@ -205,7 +216,7 @@ namespace CharacterMakingSystem.Stage
                                         stageView.InstantiateObj(_, StageView.Part.Face, targetData == database.FindDefaultFaceData(charaData.gender));
                                         if (stageView.GetHairColor() != charaData.hairColor)
                                         {
-                                            stageView.SetHairColor(charaData.hairColor);
+                                            stageView.SetHairColor(charaData.hairColor, charaData.hairData.BaseHair);
                                         }
 
                                         if (stageView.GetFaceSkinColor() != charaData.faceSkinColor)
@@ -241,10 +252,12 @@ namespace CharacterMakingSystem.Stage
                     {
                         var charaData = isMale ? maleData : femaleData;
                         container
-                            .BindInstance(new ResultWindowData(() =>
+                            .BindInstance(new ResultWindowData(async () =>
                             {
-                                Debug.Log("テスト");
+                                vCamManager.SetVcam((int)VcamManager.Vcam.defaultCam);
                                 SceneUnLoader();
+                                await lastAnimController.StartAnim();
+                                
                             }))
                             .WhenInjectedInto<ResultWindowBase>();
                     });
@@ -279,7 +292,7 @@ namespace CharacterMakingSystem.Stage
 
             // 最初に配置しているのは女性キャラなので、色も整えておく
             stageView.SetSkinColor(femaleData.skinColor);
-            stageView.SetHairColor(femaleData.hairColor);
+            stageView.SetHairColor(femaleData.hairColor, femaleData.hairData.BaseHair);
             stageView.SetEyeColor(femaleData.eyeColor);
             stageView.SetFaceSkinColor(femaleData.faceSkinColor);
         }

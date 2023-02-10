@@ -213,12 +213,22 @@ namespace CharacterMakingSystem.Stage
         /// <summary>
         /// 髪の色を変更する(後ろ髪があれば身体の部位が必要なことに注意)
         /// </summary>
-        /// <param name="color"></param>
-        public void SetHairColor(Color color)
+        /// <param name="color">任意の色</param>
+        /// <param name="hairback">後ろ髪が必要かどうか</param>
+        public void SetHairColor(Color color, bool hairback)
         {
             foreach (var hairColor in hairColors)
             {
-                hairColor.color = color;
+                if (!hairback && hairColor.name.Contains(HAIRBACK))
+                {
+                    var nowColor = color;
+                    nowColor.a = 0;
+                    hairColor.color = nowColor;
+                }
+                else
+                {
+                    hairColor.color = color;
+                }
             }
         }
 
