@@ -6,6 +6,7 @@ namespace CharacterMakingSystem.CoreSystem
 {
     public enum SceneName
     {
+        None,
         Sex,
         Face,
         Look,
@@ -56,8 +57,16 @@ namespace CharacterMakingSystem.CoreSystem
         /// <summary>
         /// アクティブなシーンのうち、sceneNameTableに登録してあるものを全取得する
         /// </summary>
+        /// <param name="exclusionScenes">検索から除外するシーン</param>
         /// <returns>シーン名文字列</returns>
-        string[] GetActiveSceneNames();
+        string[] GetActiveSceneNames(params SceneName[] exclusionScenes);
+
+        /// <summary>
+        /// アクティブなシーンのうち、sceneNameTableに登録してあるものを全取得する
+        /// </summary>
+        /// <param name="exclusionScenes">検索から除外するシーン</param>
+        /// <returns>シーン名文字列</returns>
+        string[] GetActiveSceneNames(string[] exclusionScenes = null);
 
         /// <summary>
         /// 任意のシーン以外のテーブルに登録されているシーンを返す

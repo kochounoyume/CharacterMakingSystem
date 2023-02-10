@@ -174,10 +174,6 @@ namespace CharacterMakingSystem.Stage
                                         {
                                             stageView.SetHairColor(charaData.hairColor);
                                         }
-                                        if (stageView.GetFaceSkinColor() != charaData.faceSkinColor)
-                                        {
-                                            stageView.SetFaceSkinColor(charaData.faceSkinColor);
-                                        }
                                     }).Forget();
                                 },
                                 charaData.hairColor,
@@ -216,6 +212,11 @@ namespace CharacterMakingSystem.Stage
                                         {
                                             stageView.SetFaceSkinColor(charaData.faceSkinColor);
                                         }
+
+                                        if (stageView.GetEyeColor() != charaData.eyeColor)
+                                        {
+                                            stageView.SetEyeColor(charaData.eyeColor);
+                                        }
                                     }).Forget();
                                 },
                                 charaData.faceSkinColor,
@@ -236,15 +237,14 @@ namespace CharacterMakingSystem.Stage
                 },
                 createProgBtnFunc: () =>
                 {
-                    vCamManager.SetVcam((int)VcamManager.Vcam.defaultCam);
-                    SceneUnLoader(SceneName.Result);
                     sceneController.LoadSceneAsync(SceneName.Result, container =>
                     {
                         var charaData = isMale ? maleData : femaleData;
                         container
                             .BindInstance(new ResultWindowData(() =>
                             {
-                                Debug.Log("マーシー");
+                                Debug.Log("テスト");
+                                SceneUnLoader();
                             }))
                             .WhenInjectedInto<ResultWindowBase>();
                     });
@@ -288,15 +288,11 @@ namespace CharacterMakingSystem.Stage
         /// 該当シーン以外のシーンを削除する
         /// </summary>
         /// <param name="sceneName"></param>
-        private void SceneUnLoader(SceneName sceneName)
+        private void SceneUnLoader(SceneName sceneName = SceneName.None)
         {
-            var otherScenes = sceneController.FindOtherSceneNames(sceneName);
-            foreach (var activeScene in sceneController.GetActiveSceneNames())
+            foreach (var activeScene in sceneController.GetActiveSceneNames(sceneName != SceneName.None ? sceneController.FindOtherSceneNames(sceneName) : null))
             {
-                if (otherScenes.Contains(activeScene))
-                {
-                    sceneController.UnloadSceneAsync(activeScene).Forget();
-                }
+                sceneController.UnloadSceneAsync(activeScene).Forget();
             }
         }
     }

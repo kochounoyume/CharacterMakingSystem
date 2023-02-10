@@ -32,7 +32,7 @@ namespace CharacterMakingSystem.Stage
 
         private Dictionary<int, CinemachineVirtualCamera> vCamDictionary = new();
 
-        private void Start()
+        private void Awake()
         {
             vCamDictionary.Add((int)Vcam.defaultCam, defaultCam);
             vCamDictionary.Add((int)Vcam.lookCam, lookCam);

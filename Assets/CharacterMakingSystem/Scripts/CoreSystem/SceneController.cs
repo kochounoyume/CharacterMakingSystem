@@ -15,7 +15,7 @@ namespace CharacterMakingSystem.CoreSystem
         /// <summary>
         /// シーン名のテーブル
         /// </summary>
-        private readonly Dictionary<SceneName, string> sceneNameTable = new()
+        private static readonly Dictionary<SceneName, string> sceneNameTable = new()
         {
             {SceneName.Sex, "SexScene"},
             {SceneName.Face, "FaceScene"},
@@ -29,7 +29,8 @@ namespace CharacterMakingSystem.CoreSystem
         /// </summary>
         private const string BASE_SCENE = "Stage";
         
-        [Inject] private ZenjectSceneLoader zenjectSceneLoader;
+        [Inject] 
+        private ZenjectSceneLoader zenjectSceneLoader;
 
         /// <summary>
         /// 非同期でシーンをロードする
@@ -96,9 +97,28 @@ namespace CharacterMakingSystem.CoreSystem
         /// <summary>
         /// アクティブなシーンのうち、sceneNameTableに登録してあるものを全取得する
         /// </summary>
+        /// <param name="exclusionScenes">検索から除外するシーン</param>
         /// <returns>シーン名文字列</returns>
-        public string[] GetActiveSceneNames() 
-            => GetActiveScenes().Where(scene => sceneNameTable.ContainsValue(scene)).ToArray();
+        public string[] GetActiveSceneNames(params SceneName[] exclusionScenes)
+        {
+            // ここは処理軽量化のため敢えてLINQ使わない
+            var result = new List<string>();
+            foreach (var sceneName in exclusionScenes)
+            {
+                result.Add(sceneNameTable[sceneName]);
+            }
+            return GetActiveSceneNames(result.ToArray());
+        }
+
+        /// <summary>
+        /// アクティブなシーンのうち、sceneNameTableに登録してあるものを全取得する
+        /// </summary>
+        /// <param name="exclusionScenes">検索から除外するシーン</param>
+        /// <returns>シーン名文字列</returns>
+        public string[] GetActiveSceneNames(string[] exclusionScenes = null)
+            => exclusionScenes != null
+                ? GetActiveScenes().Where(scene => sceneNameTable.ContainsValue(scene) && exclusionScenes.Contains(scene)).ToArray()
+                : GetActiveScenes().Where(scene => sceneNameTable.ContainsValue(scene)).ToArray();
 
         /// <summary>
         /// 任意のシーン以外のテーブルに登録されているシーンを返す

@@ -55,10 +55,7 @@ namespace CharacterMakingSystem.Stage
         public enum Part { CostumeBody, Face, Hair }
 
         // Start is called before the first frame update
-        void Start()
-        {
-            SetParameter(costumeBody, face, hair);
-        }
+        void Start() => SetParameter(costumeBody, face, hair);
 
         /// <summary>
         /// 必要な取得要素を設定する（一部だけ更新することも可能）

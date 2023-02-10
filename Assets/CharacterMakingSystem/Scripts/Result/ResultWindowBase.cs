@@ -8,6 +8,7 @@ namespace CharacterMakingSystem.Result
 {
     using CoreSystem;
     using Data;
+    using UI;
     
     /// <summary>
     /// キャラクターメイク確定画面の実装と最終的な完成データを返すクラス
@@ -20,6 +21,9 @@ namespace CharacterMakingSystem.Result
         [SerializeField, Tooltip("キャンセルボタン")]
         private Button cancelBtn = null;
 
+        [SerializeField, Tooltip("テロップアニメーション")]
+        private TelopAnimManager telopAnimManager = null;
+
         [Inject] 
         private ISceneController sceneController;
 
@@ -30,10 +34,11 @@ namespace CharacterMakingSystem.Result
         {
             completeBtn.OnClickAsObservable().Subscribe(_ =>
             {
+                telopAnimManager.TelopAnim(true);
                 data?.completeBtnFunc.Invoke();
             }).AddTo(this);
             
-            cancelBtn.OnCancelAsObservable().Subscribe(_ =>
+            cancelBtn.OnClickAsObservable().Subscribe(_ =>
             {
                 sceneController.UnloadSceneAsync(SceneName.Result);
             }).AddTo(this);
