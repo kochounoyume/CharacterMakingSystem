@@ -47,6 +47,7 @@ namespace CharacterMakingSystem.Stage
         private const string HAIR = "Hair";
 
         private const string SKINBODY = "N00_000_00_Body_00_SKIN";
+        private const string HAIRBLOW = "N00_000_00_FaceBrow_00_FACE";
         private const string HAIRBACK = "N00_000_00_HairBack_00_HAIR";
         private const string HAIRMAIN = "N00_000_Hair_00_HAIR";
         private const string EYE = "N00_000_00_EyeIris_00_EYE";
@@ -81,7 +82,7 @@ namespace CharacterMakingSystem.Stage
 
             var skins = FindMat(SKINBODY, bodyMats);
             skinColor = skins != Array.Empty<Material>() ? skins.FirstOrDefault() : skinColor;
-            var hairList = FindMat(HAIRMAIN, hairMats).Union(FindMat(HAIRBACK, bodyMats)).ToList();
+            var hairList = FindMat(HAIRMAIN, hairMats).Union(FindMat(HAIRBACK, bodyMats)).Union(FindMat(HAIRBLOW, faceMats)).ToList();
             hairList.RemoveAll(element => element == null);
             if (hairColors == null || (bodyTrans !=null && hairTrans != null))
             {
