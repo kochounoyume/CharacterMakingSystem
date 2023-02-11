@@ -1,7 +1,7 @@
 # CharacterMakingSystem
 キャラクターメイキングを実装するパッケージです。
 
-※作りかけですが、現在こんな感じ。
+※イメージ
 ![DemoScreen](https://user-images.githubusercontent.com/78918084/210250326-29dcbfda-cc50-4ff0-9e96-ec2a861a22e3.gif)
 
 以下のアセットを利用しています。
