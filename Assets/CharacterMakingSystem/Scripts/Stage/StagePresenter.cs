@@ -255,9 +255,21 @@ namespace CharacterMakingSystem.Stage
                             .BindInstance(new ResultWindowData(async () =>
                             {
                                 vCamManager.SetVcam((int)VcamManager.Vcam.defaultCam);
-                                SceneUnLoader();
+                                SceneUnLoader(SceneName.Result);
                                 await lastAnimController.StartAnim();
-                                
+                                sceneController.UnloadBaseSceneAsync().Forget();
+                                windowData.dataEntryFunc.Invoke(new CompleteCharaData(
+                                    stageView.GetScale(),
+                                    charaData.skinColor,
+                                    charaData.hairColor,
+                                    charaData.eyeColor,
+                                    charaData.faceSkinColor,
+                                    charaData.hairData.Address,
+                                    charaData.hairData.BaseHair,
+                                    charaData.hairData.DefaultPart,
+                                    charaData.faceData.Address,
+                                    charaData.faceData.DefaultPart
+                                ));
                             }))
                             .WhenInjectedInto<ResultWindowBase>();
                     });
@@ -300,7 +312,7 @@ namespace CharacterMakingSystem.Stage
         /// <summary>
         /// 該当シーン以外のシーンを削除する
         /// </summary>
-        /// <param name="sceneName"></param>
+        /// <param name="sceneName">除外するシーン</param>
         private void SceneUnLoader(SceneName sceneName = SceneName.None)
         {
             foreach (var activeScene in sceneController.GetActiveSceneNames(sceneName != SceneName.None ? sceneController.FindOtherSceneNames(sceneName) : null))

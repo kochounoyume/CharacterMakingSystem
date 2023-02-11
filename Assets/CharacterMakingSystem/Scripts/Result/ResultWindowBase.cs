@@ -1,5 +1,5 @@
+using Cysharp.Threading.Tasks;
 using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -34,13 +34,13 @@ namespace CharacterMakingSystem.Result
         {
             completeBtn.OnClickAsObservable().Subscribe(_ =>
             {
-                telopAnimManager.TelopAnim(true);
+                telopAnimManager.TelopAnim(true, () => sceneController.UnloadSceneAsync(SceneName.Result).Forget());
                 data?.completeBtnFunc.Invoke();
             }).AddTo(this);
             
             cancelBtn.OnClickAsObservable().Subscribe(_ =>
             {
-                sceneController.UnloadSceneAsync(SceneName.Result);
+                sceneController.UnloadSceneAsync(SceneName.Result).Forget();
             }).AddTo(this);
         }
     }

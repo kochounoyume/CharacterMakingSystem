@@ -65,7 +65,11 @@ namespace CharacterMakingSystem.Stage
                 setter: value => bloom.intensity.Override(value),
                 endValue: 70.0f,
                 duration: 5.0f);
-            image.DOFade(1, 5);
+            await image.DOFade(1, 5).OnComplete(() =>
+            {
+                Destroy(image.gameObject);
+                Destroy(myTrans.gameObject);
+            });
         }
     }
 }

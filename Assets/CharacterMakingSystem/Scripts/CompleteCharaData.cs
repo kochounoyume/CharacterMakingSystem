@@ -6,6 +6,7 @@ namespace CharacterMakingSystem
     /// <summary>
     /// 最終的なキャラクターのデータ
     /// </summary>
+    [System.Serializable]
     public sealed class CompleteCharaData
     {
         /// <summary>

@@ -58,7 +58,6 @@ namespace CharacterMakingSystem.Animation
             foreach (var syncAnimator in syncAnimators)
             {
                 syncAnimator.Play(nameHash, LAYER_INDEX, normalizedTime);
-                Debug.Log(nameHash);
                 //syncAnimator.Rebind();
             }
 

@@ -190,6 +190,12 @@ namespace CharacterMakingSystem.Stage
         }
 
         /// <summary>
+        /// プレイヤーのScaleを取得する（身長とは数値が違うことに注意）
+        /// </summary>
+        /// <returns></returns>
+        public float GetScale() => playerArmature.localScale.x;
+
+        /// <summary>
         /// プレイヤーの全体的な大きさが0になると大変なので、事前に設定した変更可能範囲内になるように数値を変換する
         /// </summary>
         /// <param name="target">変換する数値</param>

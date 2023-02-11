@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -52,6 +53,13 @@ namespace CharacterMakingSystem.CoreSystem
 
             if (extraBindings != null)
             {
+                if (zenjectSceneLoader == null)
+                {
+                    var obj = new GameObject("sceneobj", typeof(SceneContext), typeof(ProjectKernel));
+                    obj.TryGetComponent(out SceneContext sceneContext);
+                    obj.TryGetComponent(out ProjectKernel projectKarnel);
+                    zenjectSceneLoader = new ZenjectSceneLoader(sceneContext, projectKarnel);
+                }
                 await zenjectSceneLoader.LoadSceneAsync(sceneName, LoadSceneMode.Additive, extraBindings);
             }
             else
@@ -78,6 +86,11 @@ namespace CharacterMakingSystem.CoreSystem
         /// </summary>
         /// <param name="sceneName">削除したいシーン名</param>
         public async UniTask UnloadSceneAsync(string sceneName) => await SceneManager.UnloadSceneAsync(sceneName);
+
+        /// <summary>
+        /// 基底シーンを削除する
+        /// </summary>
+        public async UniTask UnloadBaseSceneAsync() => await UnloadSceneAsync(BASE_SCENE);
 
         /// <summary>
         /// アクティブなシーン名を全取得

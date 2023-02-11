@@ -49,6 +49,11 @@ namespace CharacterMakingSystem.CoreSystem
         UniTask UnloadSceneAsync(string sceneName);
 
         /// <summary>
+        /// 基底シーンを削除する
+        /// </summary>
+        UniTask UnloadBaseSceneAsync();
+
+        /// <summary>
         /// アクティブなシーン名を全取得
         /// </summary>
         /// <returns>シーン名文字列</returns>

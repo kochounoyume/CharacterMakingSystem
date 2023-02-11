@@ -1,4 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
+using UniRx;
+using Zenject;
 
 namespace CharacterMakingSystem
 {
@@ -12,14 +15,26 @@ namespace CharacterMakingSystem
     public sealed class CharacterMakingSystem
     {
         private CompleteCharaData data = null;
-        
-        // private UniTask<CompleteCharaData> EntryCharacterMaking()
-        // {
-        //     var sceneController = new SceneController();
-        //     sceneController?.LoadBaseSceneAsync(container =>
-        //     {
-        //         container.BindInstance(new StageWindowData(_ => data = _)).WhenInjectedInto<StagePresenter>();
-        //     });
-        // }
+        private const string SKYBOX = "SkyboxLiteWarm";
+
+        public async UniTask<CompleteCharaData> EntryCharacterMaking()
+        {
+            // Skyboxの設定
+            var assetLoader = new AssetLoader();
+            assetLoader.LoadAsync<Material>(SKYBOX).ToObservable().Subscribe(_ =>
+            {
+                RenderSettings.skybox = _;
+            });
+
+            var sceneController = new SceneController();
+            sceneController.LoadBaseSceneAsync(container =>
+            {
+                container.BindInstance(new StageWindowData(_ => data = _)).WhenInjectedInto<StagePresenter>();
+            }).Forget();
+
+            await UniTask.WaitUntil(() => data != null);
+
+            return data;
+        }
     }
 }
