@@ -12,6 +12,8 @@
 - [UnityEffectSample](https://github.com/ktkkumamoto/UnityEffectSample)
 - [Starter Assets - Third Person Character Controller 1.1.1](https://assetstore.unity.com/packages/essentials/starter-assets-third-person-character-controller-196526?locale=ja-JP)
 - [DOTween (HOTween v2)](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676?locale=ja-JP)
+- URPブランチのみの使用
+  - [UnityChanToonShaderVer2_Project](https://github.com/unity3d-jp/UnityChanToonShaderVer2_Project)
 
 また、素材活用のため以下のサイトを利用しております。
 - [Game-icons](https://game-icons.net/)
@@ -151,3 +153,6 @@ Any use, modification, and distribution of the Standard or Modified Versions is 
 This license does not grant you the right to use any trademark, service mark, tradename, or logo of the Copyright Holder.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## UnityChanToonShaderVer2_Project
+© Unity Technologies Japan/UCL
